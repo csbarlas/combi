@@ -9,13 +9,40 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(0..<15) { item in
+                    HStack {
+                        Text("🔒").font(.system(size: 45))
+                        
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("Gym Locker").fontWeight(.bold)
+                            Text("No. 1917AB").monospaced()
+                            Text("012 34 56").monospaced()
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Your Locks")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        print("settings")
+                    } label: {
+                        Image(systemName: "gear")
+                    }
+                }
+                
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        print("hello")
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
-        .padding()
     }
 }
 
