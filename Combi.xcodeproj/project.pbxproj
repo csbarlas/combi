@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD152B78195900DCBA45 /* CombiApp.swift */; };
-		D382CD182B78195900DCBA45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD172B78195900DCBA45 /* ContentView.swift */; };
+		D382CD182B78195900DCBA45 /* LockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD172B78195900DCBA45 /* LockListView.swift */; };
 		D382CD1A2B78195A00DCBA45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D382CD192B78195A00DCBA45 /* Assets.xcassets */; };
 		D382CD1D2B78195A00DCBA45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D382CD1C2B78195A00DCBA45 /* Preview Assets.xcassets */; };
 		D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD242B78274C00DCBA45 /* LockDetailView.swift */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		D382CD122B78195900DCBA45 /* Combi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Combi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D382CD152B78195900DCBA45 /* CombiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombiApp.swift; sourceTree = "<group>"; };
-		D382CD172B78195900DCBA45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D382CD172B78195900DCBA45 /* LockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListView.swift; sourceTree = "<group>"; };
 		D382CD192B78195A00DCBA45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D382CD1C2B78195A00DCBA45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D382CD242B78274C00DCBA45 /* LockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockDetailView.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 		D382CD232B78271E00DCBA45 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D382CD172B78195900DCBA45 /* ContentView.swift */,
+				D382CD172B78195900DCBA45 /* LockListView.swift */,
 				D382CD242B78274C00DCBA45 /* LockDetailView.swift */,
 			);
 			path = View;
@@ -163,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D382CD2A2B78296200DCBA45 /* SampleLocks.swift in Sources */,
-				D382CD182B78195900DCBA45 /* ContentView.swift in Sources */,
+				D382CD182B78195900DCBA45 /* LockListView.swift in Sources */,
 				D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */,
 				D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */,
 				D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */,

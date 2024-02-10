@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LockListView: View {
     @State private var locks: [Lock] = SampleLocks.contents
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(locks) { lock in
+            List(locks, id: \.id) { lock in
+                NavigationLink(destination: LockDetailView(lock: lock), label: {
                     LockListCell(lock: lock)
-                }
+                })
             }
             .navigationTitle("Your Locks")
             .toolbar {
@@ -25,7 +25,6 @@ struct ContentView: View {
                         Image(systemName: "gear")
                     }
                 }
-                
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -62,5 +61,5 @@ struct LockListCell: View {
 }
 
 #Preview {
-    ContentView()
+    LockListView()
 }
