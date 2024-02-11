@@ -15,9 +15,16 @@ struct LockListView: View {
     
     var body: some View {
         NavigationStack {
-            List(locks, id: \.id) { lock in
-                NavigationLink(destination: LockDetailView(lock: lock), label: {
-                    LockListCell(lock: lock)
+            List {
+                ForEach(locks) { lock in
+                    NavigationLink {
+                        LockDetailView(lock: lock)
+                    } label: {
+                        LockListCell(lock: lock)
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    deleteLocks(offsets: indexSet)
                 })
             }
             .navigationTitle("Your Locks")
@@ -40,6 +47,14 @@ struct LockListView: View {
                         NewLockView()
                     })
                 }
+            }
+        }
+    }
+    
+    private func deleteLocks(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(locks[index])
             }
         }
     }
