@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LockListView: View {
     @State private var locks: [Lock] = SampleLocks.contents
+    @State private var showNewLock = false
+    
     var body: some View {
         NavigationStack {
             List(locks, id: \.id) { lock in
@@ -28,10 +30,13 @@ struct LockListView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        print("hello")
+                        showNewLock = true
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .popover(isPresented: $showNewLock, content: {
+                        NewLockView()
+                    })
                 }
             }
         }
