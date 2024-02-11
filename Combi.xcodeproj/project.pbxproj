@@ -13,7 +13,6 @@
 		D382CD1D2B78195A00DCBA45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D382CD1C2B78195A00DCBA45 /* Preview Assets.xcassets */; };
 		D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD242B78274C00DCBA45 /* LockDetailView.swift */; };
 		D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD272B7827BF00DCBA45 /* Lock.swift */; };
-		D382CD2A2B78296200DCBA45 /* SampleLocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD292B78296200DCBA45 /* SampleLocks.swift */; };
 		D382CD2C2B78329C00DCBA45 /* NewLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD2B2B78329C00DCBA45 /* NewLockView.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +24,6 @@
 		D382CD1C2B78195A00DCBA45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D382CD242B78274C00DCBA45 /* LockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockDetailView.swift; sourceTree = "<group>"; };
 		D382CD272B7827BF00DCBA45 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
-		D382CD292B78296200DCBA45 /* SampleLocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLocks.swift; sourceTree = "<group>"; };
 		D382CD2B2B78329C00DCBA45 /* NewLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				D382CD272B7827BF00DCBA45 /* Lock.swift */,
-				D382CD292B78296200DCBA45 /* SampleLocks.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,7 +163,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D382CD2C2B78329C00DCBA45 /* NewLockView.swift in Sources */,
-				D382CD2A2B78296200DCBA45 /* SampleLocks.swift in Sources */,
 				D382CD182B78195900DCBA45 /* LockListView.swift in Sources */,
 				D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */,
 				D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */,
