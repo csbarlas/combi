@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CombiApp: App {
@@ -13,5 +14,6 @@ struct CombiApp: App {
         WindowGroup {
             LockListView()
         }
+        .modelContainer(for: Lock.self)
     }
 }

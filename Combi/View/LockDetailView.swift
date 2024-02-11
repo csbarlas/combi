@@ -19,7 +19,7 @@ struct LockDetailView: View {
             }
             
             if let lockerNumber = lock.lockerNumber {
-                Text("No. " + lockerNumber).font(.title)
+                Text("No. " + lockerNumber).font(.title).monospaced()
             }
             
             Text(lock.combination).font(.title).monospaced()
@@ -32,6 +32,7 @@ struct LockDetailView: View {
                     Text("Edit")
                 }
             }.buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
         }
     }
 }

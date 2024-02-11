@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Lock: Identifiable {
+@Model
+final class Lock: Identifiable {
     let id = UUID()
     let emoji: String
     let displayName: String?

@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct LockListView: View {
-    @State private var locks: [Lock] = SampleLocks.contents
+    @Environment(\.modelContext) private var modelContext
+    @Query private var locks: [Lock]
     @State private var showNewLock = false
     
     var body: some View {
