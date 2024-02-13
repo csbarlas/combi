@@ -48,18 +48,25 @@ struct NewLockView: View {
                                 .monospaced()
                                 .onChange(of: combination) { oldValue, newValue in
                                     if newValue.count > oldValue.count {
-                                        combinationInsertionMode = true
+                                        if(newValue.count > numberOfSegments * segmentLength + numberOfSpaces) {
+                                            combination = oldValue
+                                            return
+                                        }
+                                        if (newValue.count > segmentLength) {
+                                            combinationInsertionMode = true
+                                        }
                                     }
                                     else if oldValue.count > newValue.count {
                                         combinationInsertionMode = false
                                     }
                                     
                                     if (combinationInsertionMode) {
-                                        let spaceTriggerLength = (segmentLength * numberOfSpaces) + (numberOfSpaces + (segmentLength - 1))
-                                        if (newValue.count - 1 == spaceTriggerLength) {
-                                                combination = newValue + " "
-                                            numberOfSpaces += 1
-                                        }
+//                                        let spaceTriggerLength = (segmentLength * numberOfSpaces) + (numberOfSpaces + (segmentLength - 1))
+//                                        if (newValue.count - 1 == spaceTriggerLength) {
+//                                                combination = newValue + " "
+//                                            numberOfSpaces += 1
+//                                        }
+                                        formatCombination()
                                     } else {
                                         print("\(segmentLength) \(numberOfSpaces)")
                                         let deletionTrigger = (segmentLength * numberOfSpaces) + (numberOfSpaces - 1)
@@ -70,6 +77,12 @@ struct NewLockView: View {
                                             numberOfSpaces -= 1
                                         }
                                     }
+                                }
+                                .onChange(of: segmentLength) {
+                                    formatCombination()
+                                }
+                                .onChange(of: numberOfSegments) {
+                                    formatCombination()
                                 }
                         }
                     }
@@ -94,8 +107,47 @@ struct NewLockView: View {
         }
     }
     
-    func formatCombination() {
+    func formatCombination(oldSegmentLength: Int? = nil, oldNumberOfSegment: Int? = nil) {
+        //First we strip old combination of all whitespace
+        var tempCombination = combination
+        tempCombination.removeAll(where: { $0 == Character(" ")} )
+        numberOfSpaces = 0
         
+        //Then limit string length
+        let newLength = numberOfSegments * segmentLength
+        let newEndIndex: String.Index
+        if tempCombination.count < newLength {
+            newEndIndex = tempCombination.endIndex
+        } else {
+            newEndIndex = tempCombination.index(tempCombination.startIndex, offsetBy: newLength - 1)
+        }
+        if (!tempCombination.isEmpty && tempCombination.count > newLength) { tempCombination = String(tempCombination[...newEndIndex])}
+        
+        //Then insert spaces
+        var spacesInserted = 0
+        if (tempCombination.count > segmentLength) {
+            let maxNumOfSpaces = numberOfSegments - 1
+            for currentSpace in 0..<maxNumOfSpaces {
+                if (tempCombination.count - 1 < ((segmentLength * (currentSpace + 1)) + currentSpace)) { continue }
+                tempCombination.insert(" ", at: tempCombination.index(tempCombination.startIndex, offsetBy: segmentLength * (currentSpace + 1) + currentSpace))
+                spacesInserted += 1
+            }
+        }
+        
+        numberOfSpaces = spacesInserted
+        combination = tempCombination
+        
+        
+        //Then we compute how many spaces the new combo should have ???
+//        var oldComboLength: Int? = nil
+//        if let oldSegmentLength = oldSegmentLength {
+//            oldComboLength = oldSegmentLength * numberOfSegments
+//        }
+//        else if let oldNumberOfSegment = oldNumberOfSegment {
+//            oldComboLength = oldNumberOfSegment * segmentLength
+//        }
+//        
+//        guard let oldComboLength = oldComboLength else { return }
     }
     
     func segmentLengthStepperLabel() -> String {
@@ -104,9 +156,9 @@ struct NewLockView: View {
             fallthrough
         case "Rotary":
             if (segmentLength == 1) {
-                return "\(segmentLength) number / segment"
+                return "\(segmentLength) digit / segment"
             } else {
-                return "\(segmentLength) numbers / segment"
+                return "\(segmentLength) digits / segment"
             }
         case "Word":
             if (segmentLength == 1) {
