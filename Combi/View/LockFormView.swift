@@ -13,21 +13,23 @@ struct LockFormView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var locks: [Lock]
     
-    @State private var emoji = ""
-    @State private var displayName = ""
-    @State private var lockerNo = ""
-    @State private var combination = ""
+    @State private var emoji: String
+    @State private var displayName: String
+    @State private var lockerNo: String
+    @State private var combination: String
     
-    @State private var showAlert = false
-    @State private var alertMessage: String? = nil
+    @State private var showAlert: Bool
+    @State private var alertMessage: String?
     
     let lockTypes = ["Rotary", "Padlock", "Word", "Directional"]
-    @State private var selectedLockType = "Rotary"
+    @State private var selectedLockType: String
     
-    @State private var numberOfSegments = 3
-    @State private var segmentLength = 1
+    @State private var numberOfSegments: Int
+    @State private var segmentLength: Int
     
-    @State private var numberOfSpaces = 0
+    @State private var numberOfSpaces: Int
+    
+    private var lock: Lock?
     
     var body: some View {
         NavigationStack {
@@ -75,11 +77,16 @@ struct LockFormView: View {
                     }
                 }
             }
-            .navigationTitle("New Lock")
+            .navigationTitle(lock == nil ? "New Lock" : "Edit Lock")
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 Button("Submit") {
-                    createNewLock()
+                    if let _ = lock {
+                        saveLockEdits()
+                    } else {
+                        createNewLock()
+                    }
+                    
                 }
             }
             .alert(alertMessage ?? "Error", isPresented: $showAlert) {
@@ -162,6 +169,56 @@ struct LockFormView: View {
     func instanceAndStoreLock() {
         let newLock = Lock(emoji: emoji.isEmpty ? "🔒" : emoji, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: numberOfSegments, segmentLength: segmentLength, acceptedValues: .numeric)
         modelContext.insert(newLock)
+    }
+    
+    func saveLockEdits() {
+        let verified = verifyMinimumRequirements()
+        if !verified { return }
+        else {
+            guard let lock = lock else { return }
+            lock.emoji = self.emoji
+            lock.combination = combination
+            lock.numberOfSegments = numberOfSegments
+            lock.segmentLength = segmentLength
+            //TODO This will cause bugs, assuming lock type
+            lock.acceptedValues = .numeric
+            lock.displayName = displayName.isEmpty ? nil : displayName
+            lock.lockerNumber = lockerNo.isEmpty ? nil : lockerNo
+            dismiss()
+        }
+    }
+    
+    // Initializer used when there is no lock to edit AKA create mode
+    init() {
+        self._combination = State(initialValue: "")
+        self._emoji = State(initialValue: "")
+        self._displayName = State(initialValue: "")
+        self._lockerNo = State(initialValue: "")
+        self._showAlert = State(initialValue: false)
+        self._alertMessage = State(initialValue: nil)
+        self._selectedLockType = State(initialValue: "Rotary")
+        self._numberOfSegments = State(initialValue: 3)
+        self._segmentLength = State(initialValue: 2)
+        self._numberOfSpaces = State(initialValue: 0)
+        self.lock = nil
+    }
+    
+    /*
+     * Initializer used when there is a lock to edit AKA edit mode
+     * Reference: https://stackoverflow.com/questions/68217128/variable-varname-used-before-being-initialized-in-swiftui
+     */
+    init(lock: Lock) {
+        self._combination = State(initialValue: lock.combination)
+        self._emoji = State(initialValue: lock.emoji)
+        self._displayName = State(initialValue: lock.displayName ?? "")
+        self._lockerNo = State(initialValue: lock.lockerNumber ?? "")
+        self._showAlert = State(initialValue: false)
+        self._alertMessage = State(initialValue: nil)
+        self._selectedLockType = State(initialValue: "Rotary")
+        self._numberOfSegments = State(initialValue: lock.numberOfSegments)
+        self._segmentLength = State(initialValue: lock.segmentLength)
+        self._numberOfSpaces = State(initialValue: 0)
+        self.lock = lock
     }
 }
 

@@ -37,7 +37,7 @@ struct LockDetailView: View {
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .popover(isPresented: $showLockFormPopover, content: {
-                    EditLockFormView(lock: lock)
+                    LockFormView(lock: lock)
                 })
         }
     }
