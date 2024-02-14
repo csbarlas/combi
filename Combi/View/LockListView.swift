@@ -44,7 +44,7 @@ struct LockListView: View {
                         Image(systemName: "plus")
                     }
                     .popover(isPresented: $showNewLock, content: {
-                        NewLockView()
+                        LockFormView()
                     })
                 }
             }

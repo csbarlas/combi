@@ -10,6 +10,8 @@ import SwiftUI
 struct LockDetailView: View {
     var lock: Lock
     
+    @State private var showLockFormPopover = false
+    
     var body: some View {
         VStack(alignment: .center) {
             Text(lock.emoji).font(.system(size: 72))
@@ -25,14 +27,18 @@ struct LockDetailView: View {
             Text(lock.combination).font(.title).monospaced()
             
             Button {
-                print("Edit Lock")
+                showLockFormPopover = true
             } label: {
                 HStack {
                     Image(systemName: "pencil")
                     Text("Edit")
                 }
-            }.buttonStyle(.borderedProminent)
-                .buttonBorderShape(.capsule)
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .popover(isPresented: $showLockFormPopover, content: {
+                    EditLockFormView(lock: lock)
+                })
         }
     }
 }

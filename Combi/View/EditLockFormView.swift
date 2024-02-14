@@ -8,27 +8,28 @@
 import SwiftUI
 import SwiftData
 
-struct NewLockView: View {
+struct EditLockFormView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var locks: [Lock]
     
-    @State private var emoji = ""
-    @State private var displayName = ""
-    @State private var lockerNo = ""
-    @State private var combination = ""
+    @State private var emoji: String
+    @State private var displayName: String
+    @State private var lockerNo: String
+    @State private var combination: String
     
-    @State private var showAlert = false
-    @State private var alertMessage: String? = nil
+    @State private var showAlert: Bool
+    @State private var alertMessage: String?
     
     let lockTypes = ["Rotary", "Padlock", "Word", "Directional"]
-    @State private var selectedLockType = "Rotary"
+    @State private var selectedLockType: String
     
-    @State private var numberOfSegments = 3
-    @State private var segmentLength = 1
+    @State private var numberOfSegments: Int
+    @State private var segmentLength: Int
     
-    @State private var numberOfSpaces = 0
-    @State private var combinationInsertionMode = true
+    @State private var numberOfSpaces: Int
+    
+    private var lock: Lock
     
     var body: some View {
         NavigationStack {
@@ -44,7 +45,7 @@ struct NewLockView: View {
                         if (selectedLockType != "Directional") {
                             Stepper("\(numberOfSegments) segments", value: $numberOfSegments, in: 3...5)
                             Stepper(segmentLengthStepperLabel(), value: $segmentLength, in: 1...2)
-                            TextField("Combination", text: $combination)
+                            let textField = TextField("Combination", text: $combination)
                                 .monospaced()
                                 .onChange(of: combination) { oldValue, newValue in
                                     if newValue.count > oldValue.count {
@@ -61,6 +62,11 @@ struct NewLockView: View {
                                 .onChange(of: numberOfSegments) {
                                     formatCombination()
                                 }
+                            if selectedLockType == "Rotary" {
+                                textField.keyboardType(.numberPad)
+                            } else {
+                                textField
+                            }
                         }
                     }
                     
@@ -71,11 +77,11 @@ struct NewLockView: View {
                     }
                 }
             }
-            .navigationTitle("New Lock")
+            .navigationTitle("Edit Lock")
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 Button("Submit") {
-                    createNewLock()
+                    saveLock()
                 }
             }
             .alert(alertMessage ?? "Error", isPresented: $showAlert) {
@@ -136,11 +142,19 @@ struct NewLockView: View {
         }
     }
     
-    func createNewLock() {
+    func saveLock() {
         let verified = verifyMinimumRequirements()
         if !verified { return }
         else {
-            instanceAndStoreLock()
+            //lock.combination = self.combination
+            lock.emoji = self.emoji
+            lock.combination = combination
+            lock.numberOfSegments = numberOfSegments
+            lock.segmentLength = segmentLength
+            //TODO This will cause bugs
+            lock.acceptedValues = .numeric
+            lock.displayName = displayName.isEmpty ? nil : displayName
+            lock.lockerNumber = lockerNo.isEmpty ? nil : lockerNo
             dismiss()
         }
     }
@@ -156,11 +170,27 @@ struct NewLockView: View {
     }
     
     func instanceAndStoreLock() {
-        let newLock = Lock(emoji: emoji.isEmpty ? "🔒" : emoji, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric)
+        let newLock = Lock(emoji: emoji.isEmpty ? "🔒" : emoji, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: self.numberOfSegments, segmentLength: self.segmentLength, acceptedValues: .numeric)
         modelContext.insert(newLock)
+    }
+    
+    //Reference: https://stackoverflow.com/questions/68217128/variable-varname-used-before-being-initialized-in-swiftui
+    init(lock: Lock) {
+        self._combination = State(initialValue: lock.combination)
+        self._emoji = State(initialValue: lock.emoji)
+        self._displayName = State(initialValue: lock.displayName ?? "")
+        self._lockerNo = State(initialValue: lock.lockerNumber ?? "")
+        self._showAlert = State(initialValue: false)
+        self._alertMessage = State(initialValue: nil)
+        self._selectedLockType = State(initialValue: "Rotary")
+        self._numberOfSegments = State(initialValue: lock.numberOfSegments)
+        self._segmentLength = State(initialValue: lock.segmentLength)
+        self._numberOfSpaces = State(initialValue: 0)
+        self.lock = lock
     }
 }
 
+
 #Preview {
-    NewLockView()
+    EditLockFormView(lock: Lock(combination: "12 34 45", numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric))
 }

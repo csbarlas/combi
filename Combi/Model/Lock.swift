@@ -17,14 +17,14 @@ enum LockCharacterType: Codable {
 @Model
 final class Lock: Identifiable {
     let id = UUID()
-    let emoji: String
-    let numberOfSegments: Int
-    let segmentLength: Int
-    let acceptedValues: LockCharacterType
+    var emoji: String
+    var numberOfSegments: Int
+    var segmentLength: Int
+    var acceptedValues: LockCharacterType
     
-    let displayName: String?
-    let lockerNumber: String?
-    let combination: String
+    var displayName: String?
+    var lockerNumber: String?
+    var combination: String
     
     init(emoji: String = "🔒", displayName: String? = nil, lockerNumber: String? = nil, combination: String, numberOfSegments: Int, segmentLength: Int, acceptedValues: LockCharacterType) {
         self.emoji = emoji

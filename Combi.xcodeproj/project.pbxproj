@@ -13,7 +13,8 @@
 		D382CD1D2B78195A00DCBA45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D382CD1C2B78195A00DCBA45 /* Preview Assets.xcassets */; };
 		D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD242B78274C00DCBA45 /* LockDetailView.swift */; };
 		D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD272B7827BF00DCBA45 /* Lock.swift */; };
-		D382CD2C2B78329C00DCBA45 /* NewLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD2B2B78329C00DCBA45 /* NewLockView.swift */; };
+		D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD2B2B78329C00DCBA45 /* LockFormView.swift */; };
+		D38FE4E52B7C5F5300F7C794 /* EditLockFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38FE4E42B7C5F5300F7C794 /* EditLockFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +25,8 @@
 		D382CD1C2B78195A00DCBA45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D382CD242B78274C00DCBA45 /* LockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockDetailView.swift; sourceTree = "<group>"; };
 		D382CD272B7827BF00DCBA45 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
-		D382CD2B2B78329C00DCBA45 /* NewLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLockView.swift; sourceTree = "<group>"; };
+		D382CD2B2B78329C00DCBA45 /* LockFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockFormView.swift; sourceTree = "<group>"; };
+		D38FE4E42B7C5F5300F7C794 /* EditLockFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLockFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +81,8 @@
 			children = (
 				D382CD172B78195900DCBA45 /* LockListView.swift */,
 				D382CD242B78274C00DCBA45 /* LockDetailView.swift */,
-				D382CD2B2B78329C00DCBA45 /* NewLockView.swift */,
+				D382CD2B2B78329C00DCBA45 /* LockFormView.swift */,
+				D38FE4E42B7C5F5300F7C794 /* EditLockFormView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -162,11 +165,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D382CD2C2B78329C00DCBA45 /* NewLockView.swift in Sources */,
+				D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */,
 				D382CD182B78195900DCBA45 /* LockListView.swift in Sources */,
 				D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */,
 				D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */,
 				D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */,
+				D38FE4E52B7C5F5300F7C794 /* EditLockFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
