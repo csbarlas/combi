@@ -62,9 +62,13 @@ struct LockFormView: View {
                                 .onChange(of: numberOfSegments) {
                                     formatCombination()
                                 }
-                            if selectedLockType == "Rotary" {
+                            if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
                                 textField.keyboardType(.numberPad)
+                            } else if selectedLockType == "Word" {
+                                textField.textInputAutocapitalization(.never)
                             } else {
+                                // We are in "Directional" case with arrows
+                                // TODO: Custom keyboard
                                 textField
                             }
                         }
@@ -95,8 +99,11 @@ struct LockFormView: View {
     }
     
     func formatCombination() {
-        //First we strip old combination of all whitespace
+        //First, capitalize any letters for consistency
         var tempCombination = combination
+        tempCombination = tempCombination.uppercased()
+        
+        //Then strip old combination of all whitespace
         tempCombination.removeAll(where: { $0 == Character(" ")} )
         numberOfSpaces = 0
         
@@ -160,9 +167,42 @@ struct LockFormView: View {
             alertMessage = "Please enter a combination."
             showAlert = true
             return false
-        } else if combination.count < numberOfSegments * segmentLength {
+        } else if (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
             alertMessage = "Combination is too short!"
             showAlert = true
+            return false
+        } else if !verifyFieldsValidity() {
+            showAlert = true
+            return false
+        }
+        
+        return true
+    }
+    
+    func verifyFieldsValidity() -> Bool {
+        return verifyLockCharacters()
+    }
+    
+    func verifyLockCharacters() -> Bool {
+        switch selectedLockType {
+        case "Rotary":
+            fallthrough
+        case "Padlock":
+            let nonDigitRegex = try! Regex("[^0-9]")
+            if combination.contains(nonDigitRegex) {
+                alertMessage = "\(selectedLockType) combinations must only contain digits!"
+                return false
+            }
+        case "Word":
+            let nonDigitLetterRegex = try! Regex("[^0-9A-Z]")
+            if combination.contains(nonDigitLetterRegex) {
+                alertMessage = "\(selectedLockType) combinations must only contain digits and letters!"
+                return false
+            }
+        case "Directional":
+            //TODO: Check if only arrow emojis are used
+            return false
+        default:
             return false
         }
         
@@ -183,7 +223,7 @@ struct LockFormView: View {
             lock.combination = combination
             lock.numberOfSegments = numberOfSegments
             lock.segmentLength = segmentLength
-            //TODO This will cause bugs, assuming lock type
+            //TODO: This will cause bugs, assuming lock type
             lock.acceptedValues = .numeric
             lock.displayName = displayName.isEmpty ? nil : displayName
             lock.lockerNumber = lockerNo.isEmpty ? nil : lockerNo
