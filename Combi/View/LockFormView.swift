@@ -86,7 +86,6 @@ struct LockFormView: View {
                     } else {
                         createNewLock()
                     }
-                    
                 }
             }
             .alert(alertMessage ?? "Error", isPresented: $showAlert) {
@@ -159,6 +158,10 @@ struct LockFormView: View {
     func verifyMinimumRequirements() -> Bool {
         if combination.isEmpty {
             alertMessage = "Please enter a combination."
+            showAlert = true
+            return false
+        } else if combination.count < numberOfSegments * segmentLength {
+            alertMessage = "Combination is too short!"
             showAlert = true
             return false
         }
