@@ -122,7 +122,7 @@ struct LockFormView: View {
                         } else {
                             // We are in "Directional" case with arrows
                             // TODO: Custom keyboard
-                            textField.textSelection(.disabled)
+                            textField.disabled(true)
                         }
                     }
                     
