@@ -36,6 +36,7 @@ struct LockFormView: View {
             VStack {
                 Form {
                     Section(header: Text("Lock Details")) {
+                        
                         Picker("Type", selection: $selectedLockType) {
                             ForEach(lockTypes, id: \.self) { lockType in
                                     Text("\(lockType)")
@@ -45,32 +46,83 @@ struct LockFormView: View {
                         if (selectedLockType != "Directional") {
                             Stepper("\(numberOfSegments) segments", value: $numberOfSegments, in: 3...5)
                             Stepper(segmentLengthStepperLabel(), value: $segmentLength, in: 1...2)
-                            let textField = TextField("Combination", text: $combination)
-                                .monospaced()
-                                .onChange(of: combination) { oldValue, newValue in
-                                    if newValue.count > oldValue.count {
-                                        if(newValue.count > numberOfSegments * segmentLength + numberOfSpaces) {
-                                            combination = oldValue
-                                            return
-                                        }
+                            
+                        } else {
+                            Grid() {
+                                GridRow {
+                                    Button {
+                                        combination += "↑"
+                                    } label: {
+                                        Image(systemName: "arrow.up")
+                                            .padding(5)
                                     }
-                                    formatCombination()
+                                    .font(.largeTitle)
+                                    .buttonStyle(.bordered)
+                                    .frame(maxWidth: .infinity, alignment: .center)
                                 }
-                                .onChange(of: segmentLength) {
-                                    formatCombination()
+                                GridRow {
+                                    HStack(spacing: 10.0) {
+                                        Button {
+                                            combination += "←"
+                                        } label: {
+                                            Image(systemName: "arrow.left")
+                                                .padding(.vertical, 5)
+                                        }
+                                        .font(.largeTitle)
+                                        .buttonStyle(.bordered)
+                                        Button {
+                                            if combination.count > 0 {
+                                                combination.removeLast()
+                                            }
+                                        } label: {
+                                            Image(systemName: "delete.backward")
+                                                .padding(.vertical, 5)
+                                        }
+                                        .font(.largeTitle)
+                                        .buttonStyle(.bordered)
+                                        Button {
+                                            combination += "→"
+                                        } label: {
+                                            Image(systemName: "arrow.right")
+                                                .padding(.vertical, 5)
+                                        }
+                                        .font(.largeTitle)
+                                        .buttonStyle(.bordered)
+                                    }
+                                    
                                 }
-                                .onChange(of: numberOfSegments) {
-                                    formatCombination()
+                                GridRow {
+                                    Button {
+                                        combination += "↓"
+                                    } label: {
+                                        Image(systemName: "arrow.down")
+                                            .padding(5)
+                                    }
+                                    .font(.largeTitle)
+                                    .buttonStyle(.bordered)
                                 }
-                            if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
-                                textField.keyboardType(.numberPad)
-                            } else if selectedLockType == "Word" {
-                                textField.textInputAutocapitalization(.never)
-                            } else {
-                                // We are in "Directional" case with arrows
-                                // TODO: Custom keyboard
-                                textField
                             }
+                        }
+                        
+                        let textField = TextField("Combination", text: $combination)
+                            .monospaced()
+                            .onChange(of: combination) { oldValue, newValue in
+                                formatCombination()
+                            }
+                            .onChange(of: segmentLength) {
+                                formatCombination()
+                            }
+                            .onChange(of: numberOfSegments) {
+                                formatCombination()
+                            }
+                        if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
+                            textField.keyboardType(.numberPad)
+                        } else if selectedLockType == "Word" {
+                            textField.textInputAutocapitalization(.never)
+                        } else {
+                            // We are in "Directional" case with arrows
+                            // TODO: Custom keyboard
+                            textField.textSelection(.disabled)
                         }
                     }
                     
@@ -99,7 +151,12 @@ struct LockFormView: View {
     }
     
     func formatCombination() {
-        //First, capitalize any letters for consistency
+        //First we dont format directional combinations
+        if selectedLockType == "Directional" {
+            return
+        }
+        
+        //Capitalize any letters for consistency
         var tempCombination = combination
         tempCombination = tempCombination.uppercased()
         
@@ -167,7 +224,7 @@ struct LockFormView: View {
             alertMessage = "Please enter a combination."
             showAlert = true
             return false
-        } else if (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
+        } else if selectedLockType != "Directional" && (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
             alertMessage = "Combination is too short!"
             showAlert = true
             return false
@@ -188,7 +245,7 @@ struct LockFormView: View {
         case "Rotary":
             fallthrough
         case "Padlock":
-            let nonDigitRegex = try! Regex("[^0-9]")
+            let nonDigitRegex = try! Regex("[^0-9 ]")
             if combination.contains(nonDigitRegex) {
                 alertMessage = "\(selectedLockType) combinations must only contain digits!"
                 return false
@@ -201,7 +258,7 @@ struct LockFormView: View {
             }
         case "Directional":
             //TODO: Check if only arrow emojis are used
-            return false
+            return true
         default:
             return false
         }
