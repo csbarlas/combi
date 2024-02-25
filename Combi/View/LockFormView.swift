@@ -29,6 +29,9 @@ struct LockFormView: View {
     
     @State private var numberOfSpaces: Int
     
+    @State private var isEmojiPopoverPresented = false
+    @State private var emojiData: Emoji?
+    
     private var lock: Lock?
     
     var body: some View {
@@ -148,9 +151,7 @@ struct LockFormView: View {
                     }
                     
                     Section(header: Text("Optional")) {
-                        TextField("Emoji", text: $emoji)
-                        TextField("Nickname", text: $displayName)
-                        TextField("Locker Number", text: $lockerNo).monospaced()
+                        LockOptionalDataView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo).frame(alignment: .center)
                     }
                 }
             }

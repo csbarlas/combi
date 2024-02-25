@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4272B8BD9B7006DCAFE /* Emoji.swift */; };
+		D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */; };
+		D32BF42C2B8BE889006DCAFE /* LockOptionalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF42B2B8BE889006DCAFE /* LockOptionalDataView.swift */; };
 		D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD152B78195900DCBA45 /* CombiApp.swift */; };
 		D382CD182B78195900DCBA45 /* LockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD172B78195900DCBA45 /* LockListView.swift */; };
 		D382CD1A2B78195A00DCBA45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D382CD192B78195A00DCBA45 /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D32BF4272B8BD9B7006DCAFE /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
+		D32BF42B2B8BE889006DCAFE /* LockOptionalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOptionalDataView.swift; sourceTree = "<group>"; };
 		D382CD122B78195900DCBA45 /* Combi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Combi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D382CD152B78195900DCBA45 /* CombiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombiApp.swift; sourceTree = "<group>"; };
 		D382CD172B78195900DCBA45 /* LockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListView.swift; sourceTree = "<group>"; };
@@ -80,6 +86,8 @@
 				D382CD172B78195900DCBA45 /* LockListView.swift */,
 				D382CD242B78274C00DCBA45 /* LockDetailView.swift */,
 				D382CD2B2B78329C00DCBA45 /* LockFormView.swift */,
+				D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */,
+				D32BF42B2B8BE889006DCAFE /* LockOptionalDataView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -88,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				D382CD272B7827BF00DCBA45 /* Lock.swift */,
+				D32BF4272B8BD9B7006DCAFE /* Emoji.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -162,6 +171,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */,
+				D32BF42C2B8BE889006DCAFE /* LockOptionalDataView.swift in Sources */,
+				D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */,
 				D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */,
 				D382CD182B78195900DCBA45 /* LockListView.swift in Sources */,
 				D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */,
