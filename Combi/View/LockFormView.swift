@@ -42,6 +42,27 @@ struct LockFormView: View {
                                     Text("\(lockType)")
                             }
                         }
+                        .onChange(of: selectedLockType) { oldVal, newVal in
+                            combination = ""
+                            
+                            switch selectedLockType {
+                            case "Rotary":
+                                numberOfSegments = 3
+                                segmentLength = 2
+                            case "Padlock":
+                                numberOfSegments = 3
+                                segmentLength = 1
+                            case "Word":
+                                numberOfSegments = 5
+                                segmentLength = 1
+                            case "Directional":
+                                segmentLength = 1
+                                numberOfSegments = 15
+                            default:
+                                numberOfSegments = 3
+                                segmentLength = 2
+                            }
+                        }
                         
                         if (selectedLockType != "Directional") {
                             Stepper("\(numberOfSegments) segments", value: $numberOfSegments, in: 3...5)
@@ -115,13 +136,13 @@ struct LockFormView: View {
                             .onChange(of: numberOfSegments) {
                                 formatCombination()
                             }
+                            
                         if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
                             textField.keyboardType(.numberPad)
                         } else if selectedLockType == "Word" {
                             textField.textInputAutocapitalization(.never)
                         } else {
                             // We are in "Directional" case with arrows
-                            // TODO: Custom keyboard
                             textField.disabled(true)
                         }
                     }
