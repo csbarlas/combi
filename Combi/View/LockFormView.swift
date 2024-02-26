@@ -150,7 +150,7 @@ struct LockFormView: View {
                         }
                     }
                     
-                    Section(header: Text("Optional")) {
+                    Section(header: Text("Personalization - Optional")) {
                         LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
                     }
                 }

@@ -17,6 +17,7 @@
 		D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD242B78274C00DCBA45 /* LockDetailView.swift */; };
 		D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD272B7827BF00DCBA45 /* Lock.swift */; };
 		D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD2B2B78329C00DCBA45 /* LockFormView.swift */; };
+		D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		D382CD242B78274C00DCBA45 /* LockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockDetailView.swift; sourceTree = "<group>"; };
 		D382CD272B7827BF00DCBA45 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D382CD2B2B78329C00DCBA45 /* LockFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockFormView.swift; sourceTree = "<group>"; };
+		D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				D382CD2B2B78329C00DCBA45 /* LockFormView.swift */,
 				D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */,
 				D32BF42B2B8BE889006DCAFE /* LockOptionalFormView.swift */,
+				D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */,
 				D32BF42C2B8BE889006DCAFE /* LockOptionalFormView.swift in Sources */,
 				D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */,
+				D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */,
 				D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */,
 				D382CD182B78195900DCBA45 /* LockListView.swift in Sources */,
 				D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */,

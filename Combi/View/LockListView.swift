@@ -30,8 +30,8 @@ struct LockListView: View {
             .navigationTitle("Your Locks")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        print("settings")
+                    NavigationLink {
+                        SettingsView()
                     } label: {
                         Image(systemName: "gear")
                     }
