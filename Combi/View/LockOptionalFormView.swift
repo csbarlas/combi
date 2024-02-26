@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LockOptionalDataView: View {
+struct LockOptionalFormView: View {
     @Binding var emojiSelection: Emoji?
     @Binding var displayName: String
     @Binding var lockerNumber: String
@@ -28,13 +28,14 @@ struct LockOptionalDataView: View {
             }
             
             
-            TextField("Display Name", text: $displayName).multilineTextAlignment(.center).padding().frame(alignment: .center).fontWeight(.bold).background(RoundedRectangle(cornerRadius: 10, style: .continuous).foregroundStyle(.quinary))
+            TextField("Display Name", text: $displayName).multilineTextAlignment(.center).padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
+                
             
-            TextField("Locker No.", text: $lockerNumber).monospaced().multilineTextAlignment(.center).padding().frame( alignment: .center).fontWeight(.bold).background(RoundedRectangle(cornerRadius: 10, style: .continuous).foregroundStyle(.quinary))
+            TextField("Locker No.", text: $lockerNumber).monospaced().multilineTextAlignment(.center).padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
         }
     }
 }
 
 #Preview {
-    LockOptionalDataView(emojiSelection: .constant(nil), displayName: .constant(""), lockerNumber: .constant(""))
+    LockOptionalFormView(emojiSelection: .constant(nil), displayName: .constant(""), lockerNumber: .constant(""))
 }

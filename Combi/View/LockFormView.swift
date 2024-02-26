@@ -151,7 +151,7 @@ struct LockFormView: View {
                     }
                     
                     Section(header: Text("Optional")) {
-                        LockOptionalDataView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo).frame(alignment: .center)
+                        LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
                     }
                 }
             }
