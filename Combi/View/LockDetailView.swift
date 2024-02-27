@@ -39,7 +39,7 @@ struct LockDetailView: View {
             .popover(isPresented: $showLockFormPopover, content: {
                     LockFormView(lock: lock)
                 })
-        }
+        }.navigationBarTitleDisplayMode(.inline)
     }
 }
 

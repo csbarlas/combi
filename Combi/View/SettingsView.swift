@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var isToggle = false
+    @StateObject private var colorSchemeManager = ColorSchemeManager.shared
     
     var body: some View {
         Form {
@@ -16,9 +17,14 @@ struct SettingsView: View {
                 HStack {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.blue)
-                        
+                        Image(systemName: "circle.righthalf.filled").foregroundStyle(.white)
                     }
-                    Toggle("Toggle", isOn: $isToggle)
+                    
+                    Picker("Appearance", selection: $colorSchemeManager.appearance) {
+                        Text("System").tag("system")
+                        Text("Light").tag("light")
+                        Text("Dark").tag("dark")
+                    }
                 }
             }
             
@@ -34,7 +40,8 @@ struct SettingsView: View {
                 }.listRowBackground(Color.clear)
             }
         }.navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)
+        .preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
     }
 }
 

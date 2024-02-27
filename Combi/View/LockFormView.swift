@@ -11,6 +11,7 @@ import SwiftData
 struct LockFormView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
+    @StateObject private var colorSchemeManager = ColorSchemeManager.shared
     @Query private var locks: [Lock]
     
     @State private var emoji: String
@@ -170,6 +171,7 @@ struct LockFormView: View {
                 Button("OK", role: .cancel) { }
             }
         }
+        .preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
     }
     
     func formatCombination() {

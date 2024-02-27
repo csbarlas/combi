@@ -18,6 +18,7 @@
 		D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD272B7827BF00DCBA45 /* Lock.swift */; };
 		D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD2B2B78329C00DCBA45 /* LockFormView.swift */; };
 		D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */; };
+		D3E922562B8E446C00343012 /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E922552B8E446C00343012 /* ColorSchemeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		D382CD272B7827BF00DCBA45 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D382CD2B2B78329C00DCBA45 /* LockFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockFormView.swift; sourceTree = "<group>"; };
 		D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D3E922552B8E446C00343012 /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		D382CD142B78195900DCBA45 /* Combi */ = {
 			isa = PBXGroup;
 			children = (
+				D3E922542B8E445D00343012 /* Manager */,
 				D382CD262B7827AC00DCBA45 /* Model */,
 				D382CD232B78271E00DCBA45 /* View */,
 				D382CD152B78195900DCBA45 /* CombiApp.swift */,
@@ -102,6 +105,14 @@
 				D32BF4272B8BD9B7006DCAFE /* Emoji.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D3E922542B8E445D00343012 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D3E922552B8E446C00343012 /* ColorSchemeManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +187,7 @@
 			files = (
 				D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */,
 				D32BF42C2B8BE889006DCAFE /* LockOptionalFormView.swift in Sources */,
+				D3E922562B8E446C00343012 /* ColorSchemeManager.swift in Sources */,
 				D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */,
 				D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */,
 				D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */,

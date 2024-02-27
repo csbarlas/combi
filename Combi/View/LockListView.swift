@@ -10,6 +10,7 @@ import SwiftData
 
 struct LockListView: View {
     @Environment(\.modelContext) private var modelContext
+    @StateObject private var colorSchemeManager = ColorSchemeManager.shared
     @Query private var locks: [Lock]
     @State private var showNewLock = false
     
@@ -48,7 +49,7 @@ struct LockListView: View {
                     })
                 }
             }
-        }
+        }.preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
     }
     
     private func deleteLocks(offsets: IndexSet) {
