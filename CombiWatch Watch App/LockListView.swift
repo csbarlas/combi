@@ -15,10 +15,12 @@ struct LockListView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink {
-                    LockDetailView(lock: Lock.sampleLock())
-                } label: {
-                    LockListCell(lock: Lock.sampleLock())
+                ForEach(locks) { lock in
+                    NavigationLink {
+                        LockDetailView(lock: lock)
+                    } label: {
+                        LockListCell(lock: lock)
+                    }
                 }
             }.navigationTitle("Your Locks")
         }.padding(.horizontal)
@@ -30,7 +32,7 @@ struct LockListCell: View {
     
     var body: some View {
         HStack {
-            Text(lock.emoji)
+            Text(lock.emoji ?? "")
             Text(lock.displayName ?? "Lock")
         }
     }

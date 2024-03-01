@@ -333,14 +333,14 @@ struct LockFormView: View {
      */
     init(lock: Lock) {
         self._combination = State(initialValue: lock.combination)
-        self._emoji = State(initialValue: lock.emoji)
+        self._emoji = State(initialValue: lock.emoji ?? "")
         self._displayName = State(initialValue: lock.displayName ?? "")
         self._lockerNo = State(initialValue: lock.lockerNumber ?? "")
         self._showAlert = State(initialValue: false)
         self._alertMessage = State(initialValue: nil)
         self._selectedLockType = State(initialValue: "Rotary")
-        self._numberOfSegments = State(initialValue: lock.numberOfSegments)
-        self._segmentLength = State(initialValue: lock.segmentLength)
+        self._numberOfSegments = State(initialValue: lock.numberOfSegments ?? 3)
+        self._segmentLength = State(initialValue: lock.segmentLength ?? 2)
         self._numberOfSpaces = State(initialValue: 0)
         self.lock = lock
     }

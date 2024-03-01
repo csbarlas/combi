@@ -12,7 +12,7 @@ struct LockDetailView: View {
     
     var body: some View {
         VStack {
-            Text(lock.emoji).font(.largeTitle)
+            Text(lock.emoji ?? "").font(.largeTitle)
             
             Text(lock.displayName ?? "Lock").fontWeight(.bold)
             

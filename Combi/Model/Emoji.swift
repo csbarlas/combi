@@ -10,8 +10,9 @@ import Foundation
 
 // Reference: https://github.com/gahntpo/ShoppingApp/tree/main
 struct Emoji: Identifiable, Equatable {
-    var value: Int
+    var value: Int = 0
     
+    //Note: This may limit CloudKit sync in future
     var emojiString: String {
         guard let unicodeValue = UnicodeScalar(value) else { return "?" }
         return String(unicodeValue)
