@@ -10,6 +10,14 @@
 		D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4272B8BD9B7006DCAFE /* Emoji.swift */; };
 		D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */; };
 		D32BF42C2B8BE889006DCAFE /* LockOptionalFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF42B2B8BE889006DCAFE /* LockOptionalFormView.swift */; };
+		D34891912B9276710061698D /* CombiWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34891902B9276710061698D /* CombiWatchApp.swift */; };
+		D34891932B9276710061698D /* LockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34891922B9276710061698D /* LockListView.swift */; };
+		D34891952B9276730061698D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34891942B9276730061698D /* Assets.xcassets */; };
+		D34891982B9276730061698D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34891972B9276730061698D /* Preview Assets.xcassets */; };
+		D348919B2B9276730061698D /* CombiWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D348918E2B9276710061698D /* CombiWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D34891A02B927A2A0061698D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD272B7827BF00DCBA45 /* Lock.swift */; };
+		D34891A12B927A2A0061698D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4272B8BD9B7006DCAFE /* Emoji.swift */; };
+		D34891A32B927B750061698D /* LockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34891A22B927B750061698D /* LockDetailView.swift */; };
 		D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD152B78195900DCBA45 /* CombiApp.swift */; };
 		D382CD182B78195900DCBA45 /* LockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD172B78195900DCBA45 /* LockListView.swift */; };
 		D382CD1A2B78195A00DCBA45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D382CD192B78195A00DCBA45 /* Assets.xcassets */; };
@@ -21,10 +29,40 @@
 		D3E922562B8E446C00343012 /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E922552B8E446C00343012 /* ColorSchemeManager.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D34891992B9276730061698D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D382CD0A2B78195900DCBA45 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D348918D2B9276710061698D;
+			remoteInfo = "CombiWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D348919C2B9276730061698D /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D348919B2B9276730061698D /* CombiWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D32BF4272B8BD9B7006DCAFE /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
 		D32BF42B2B8BE889006DCAFE /* LockOptionalFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOptionalFormView.swift; sourceTree = "<group>"; };
+		D348918E2B9276710061698D /* CombiWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CombiWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D34891902B9276710061698D /* CombiWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombiWatchApp.swift; sourceTree = "<group>"; };
+		D34891922B9276710061698D /* LockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListView.swift; sourceTree = "<group>"; };
+		D34891942B9276730061698D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D34891972B9276730061698D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D34891A22B927B750061698D /* LockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockDetailView.swift; sourceTree = "<group>"; };
 		D382CD122B78195900DCBA45 /* Combi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Combi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D382CD152B78195900DCBA45 /* CombiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombiApp.swift; sourceTree = "<group>"; };
 		D382CD172B78195900DCBA45 /* LockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListView.swift; sourceTree = "<group>"; };
@@ -38,6 +76,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D348918B2B9276710061698D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D382CD0F2B78195900DCBA45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,10 +93,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D348918F2B9276710061698D /* CombiWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				D34891902B9276710061698D /* CombiWatchApp.swift */,
+				D34891922B9276710061698D /* LockListView.swift */,
+				D34891942B9276730061698D /* Assets.xcassets */,
+				D34891962B9276730061698D /* Preview Content */,
+				D34891A22B927B750061698D /* LockDetailView.swift */,
+			);
+			path = "CombiWatch Watch App";
+			sourceTree = "<group>";
+		};
+		D34891962B9276730061698D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D34891972B9276730061698D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		D382CD092B78195900DCBA45 = {
 			isa = PBXGroup;
 			children = (
 				D382CD142B78195900DCBA45 /* Combi */,
+				D348918F2B9276710061698D /* CombiWatch Watch App */,
 				D382CD132B78195900DCBA45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				D382CD122B78195900DCBA45 /* Combi.app */,
+				D348918E2B9276710061698D /* CombiWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +185,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D348918D2B9276710061698D /* CombiWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D348919F2B9276730061698D /* Build configuration list for PBXNativeTarget "CombiWatch Watch App" */;
+			buildPhases = (
+				D348918A2B9276710061698D /* Sources */,
+				D348918B2B9276710061698D /* Frameworks */,
+				D348918C2B9276710061698D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CombiWatch Watch App";
+			productName = "CombiWatch Watch App";
+			productReference = D348918E2B9276710061698D /* CombiWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D382CD112B78195900DCBA45 /* Combi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D382CD202B78195A00DCBA45 /* Build configuration list for PBXNativeTarget "Combi" */;
@@ -125,10 +209,12 @@
 				D382CD0E2B78195900DCBA45 /* Sources */,
 				D382CD0F2B78195900DCBA45 /* Frameworks */,
 				D382CD102B78195900DCBA45 /* Resources */,
+				D348919C2B9276730061698D /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D348919A2B9276730061698D /* PBXTargetDependency */,
 			);
 			name = Combi;
 			productName = Combi;
@@ -145,6 +231,9 @@
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					D348918D2B9276710061698D = {
+						CreatedOnToolsVersion = 15.2;
+					};
 					D382CD112B78195900DCBA45 = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -164,11 +253,21 @@
 			projectRoot = "";
 			targets = (
 				D382CD112B78195900DCBA45 /* Combi */,
+				D348918D2B9276710061698D /* CombiWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D348918C2B9276710061698D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D34891982B9276730061698D /* Preview Assets.xcassets in Resources */,
+				D34891952B9276730061698D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D382CD102B78195900DCBA45 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -181,6 +280,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D348918A2B9276710061698D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D34891A02B927A2A0061698D /* Lock.swift in Sources */,
+				D34891A32B927B750061698D /* LockDetailView.swift in Sources */,
+				D34891A12B927A2A0061698D /* Emoji.swift in Sources */,
+				D34891932B9276710061698D /* LockListView.swift in Sources */,
+				D34891912B9276710061698D /* CombiWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D382CD0E2B78195900DCBA45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,7 +311,75 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D348919A2B9276730061698D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D348918D2B9276710061698D /* CombiWatch Watch App */;
+			targetProxy = D34891992B9276730061698D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D348919D2B9276730061698D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CombiWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = DU8A9JBL76;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CombiWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.chrisbarlas.Combi;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisbarlas.Combi.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		D348919E2B9276730061698D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CombiWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = DU8A9JBL76;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CombiWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.chrisbarlas.Combi;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisbarlas.Combi.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Release;
+		};
 		D382CD1E2B78195A00DCBA45 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -323,6 +502,7 @@
 		D382CD212B78195A00DCBA45 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -352,6 +532,7 @@
 		D382CD222B78195A00DCBA45 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -381,6 +562,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D348919F2B9276730061698D /* Build configuration list for PBXNativeTarget "CombiWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D348919D2B9276730061698D /* Debug */,
+				D348919E2B9276730061698D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D382CD0D2B78195900DCBA45 /* Build configuration list for PBXProject "Combi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

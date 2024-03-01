@@ -35,4 +35,8 @@ final class Lock: Identifiable {
         self.segmentLength = segmentLength
         self.acceptedValues = acceptedValues
     }
+    
+    static func sampleLock() -> Lock {
+        Lock(displayName: "LA Fitness Locker", lockerNumber: "1017", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric)
+    }
 }
