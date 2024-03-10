@@ -22,7 +22,7 @@ struct LockFormView: View {
     @State private var showAlert: Bool
     @State private var alertMessage: String?
     
-    let lockTypes = ["Rotary", "Padlock", "Word", "Directional"]
+    let lockTypes = ["Rotary", "Padlock", "Word", "Arrow"]
     @State private var selectedLockType: String
     
     @State private var numberOfSegments: Int
@@ -37,146 +37,320 @@ struct LockFormView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Form {
-                    Section(header: Text("Lock Details")) {
-                        
-                        Picker("Type", selection: $selectedLockType) {
-                            ForEach(lockTypes, id: \.self) { lockType in
-                                    Text("\(lockType)")
-                            }
+            ScrollView {
+                VStack(spacing: 0) {
+                    LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
+                    
+                    Picker("Type", selection: $selectedLockType) {
+                        ForEach(lockTypes, id: \.self) { lockType in
+                            Text("\(lockType)")
                         }
-                        .onChange(of: selectedLockType) { oldVal, newVal in
-                            combination = ""
-                            
-                            switch selectedLockType {
-                            case "Rotary":
-                                numberOfSegments = 3
-                                segmentLength = 2
-                            case "Padlock":
-                                numberOfSegments = 3
-                                segmentLength = 1
-                            case "Word":
-                                numberOfSegments = 5
-                                segmentLength = 1
-                            case "Directional":
-                                segmentLength = 1
-                                numberOfSegments = 15
-                            default:
-                                numberOfSegments = 3
-                                segmentLength = 2
-                            }
-                        }
+                    }
+                    .padding(.vertical)
+                    .pickerStyle(.segmented)
+                    .onChange(of: selectedLockType) { oldVal, newVal in
+                        combination = ""
                         
-                        if (selectedLockType != "Directional") {
-                            Stepper("\(numberOfSegments) segments", value: $numberOfSegments, in: 3...5)
-                            Stepper(segmentLengthStepperLabel(), value: $segmentLength, in: 1...2)
-                            
-                        } else {
-                            Grid() {
-                                GridRow {
-                                    Button {
-                                        combination += "↑"
-                                    } label: {
-                                        Image(systemName: "arrow.up")
-                                            .padding(5)
-                                    }
-                                    .font(.largeTitle)
-                                    .buttonStyle(.bordered)
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                }
-                                GridRow {
-                                    HStack(spacing: 10.0) {
-                                        Button {
-                                            combination += "←"
-                                        } label: {
-                                            Image(systemName: "arrow.left")
-                                                .padding(.vertical, 5)
-                                        }
-                                        .font(.largeTitle)
-                                        .buttonStyle(.bordered)
-                                        Button {
-                                            if combination.count > 0 {
-                                                combination.removeLast()
-                                            }
-                                        } label: {
-                                            Image(systemName: "delete.backward")
-                                                .padding(.vertical, 5)
-                                        }
-                                        .font(.largeTitle)
-                                        .buttonStyle(.bordered)
-                                        Button {
-                                            combination += "→"
-                                        } label: {
-                                            Image(systemName: "arrow.right")
-                                                .padding(.vertical, 5)
-                                        }
-                                        .font(.largeTitle)
-                                        .buttonStyle(.bordered)
-                                    }
-                                    
-                                }
-                                GridRow {
-                                    Button {
-                                        combination += "↓"
-                                    } label: {
-                                        Image(systemName: "arrow.down")
-                                            .padding(5)
-                                    }
-                                    .font(.largeTitle)
-                                    .buttonStyle(.bordered)
-                                }
-                            }
-                        }
-                        
-                        let textField = TextField("Combination", text: $combination)
-                            .monospaced()
-                            .onChange(of: combination) { oldValue, newValue in
-                                formatCombination()
-                            }
-                            .onChange(of: segmentLength) {
-                                formatCombination()
-                            }
-                            .onChange(of: numberOfSegments) {
-                                formatCombination()
-                            }
-                            
-                        if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
-                            textField.keyboardType(.numberPad)
-                        } else if selectedLockType == "Word" {
-                            textField.textInputAutocapitalization(.never)
-                        } else {
-                            // We are in "Directional" case with arrows
-                            textField.disabled(true)
+                        switch selectedLockType {
+                        case "Rotary":
+                            numberOfSegments = 3
+                            segmentLength = 2
+                        case "Padlock":
+                            numberOfSegments = 3
+                            segmentLength = 1
+                        case "Word":
+                            numberOfSegments = 5
+                            segmentLength = 1
+                        case "Arrow":
+                            segmentLength = 1
+                            numberOfSegments = 15
+                        default:
+                            numberOfSegments = 3
+                            segmentLength = 2
                         }
                     }
                     
-                    Section(header: Text("Personalization - Optional")) {
-                        LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
-                    }
-                }
-            }
-            .navigationTitle(lock == nil ? "New Lock" : "Edit Lock")
-            .toolbarTitleDisplayMode(.inline)
-            .toolbar {
-                Button("Submit") {
-                    if let _ = lock {
-                        saveLockEdits()
+                    if (selectedLockType != "Arrow") {
+                        numberControlsView(lockForm: self)
                     } else {
-                        createNewLock()
+                        arrowControlsView(combo: $combination)
+                    }
+                    
+                    TextField("Combination", text: $combination).monospaced().padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0)).padding(.top)
+                    
+                    Spacer()
+                }
+                .padding()
+                .navigationTitle(lock == nil ? "New Lock" : "Edit Lock")
+                .toolbarTitleDisplayMode(.inline)
+                .toolbar {
+                    Button("Submit") {
+                        if let _ = lock {
+                            saveLockEdits()
+                        } else {
+                            createNewLock()
+                        }
                     }
                 }
-            }
-            .alert(alertMessage ?? "Error", isPresented: $showAlert) {
-                Button("OK", role: .cancel) { }
+                .alert(alertMessage ?? "Error", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                }
             }
         }
-        .preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
+        .preferredColorScheme(ColorSchemeManager.shared.getPreferredColorScheme())
     }
+    
+    struct arrowControlsView: View {
+        @Binding var combo: String
+        
+        var body: some View {
+            Grid() {
+                GridRow {
+                    Button {
+                        combo += "↑"
+                    } label: {
+                        Image(systemName: "arrow.up")
+                            .padding(5)
+                    }
+                    .font(.largeTitle)
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
+                GridRow {
+                    HStack(spacing: 10.0) {
+                        Button {
+                            combo += "←"
+                        } label: {
+                            Image(systemName: "arrow.left")
+                                .padding(.vertical, 5)
+                        }
+                        .font(.largeTitle)
+                        .buttonStyle(.bordered)
+                        Button {
+                            if combo.count > 0 {
+                                combo.removeLast()
+                            }
+                        } label: {
+                            Image(systemName: "delete.backward")
+                                .padding(.vertical, 5)
+                        }
+                        .font(.largeTitle)
+                        .buttonStyle(.bordered)
+                        Button {
+                            combo += "→"
+                        } label: {
+                            Image(systemName: "arrow.right")
+                                .padding(.vertical, 5)
+                        }
+                        .font(.largeTitle)
+                        .buttonStyle(.bordered)
+                    }
+                    
+                }
+                GridRow {
+                    Button {
+                        combo += "↓"
+                    } label: {
+                        Image(systemName: "arrow.down")
+                            .padding(5)
+                    }
+                    .font(.largeTitle)
+                    .buttonStyle(.bordered)
+                }
+            }
+        }
+    }
+    
+    struct numberControlsView: View {
+        var lockForm: LockFormView
+        
+        var body: some View {
+            VStack(spacing: 0) {
+                HStack {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus.circle.fill").resizable().frame(width: 25, height: 25)
+                    }.padding()
+                    
+                    Text("\(lockForm.numberOfSegments)").font(.system(size: 84.0)).bold().fontDesign(.rounded)
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "minus.circle.fill").resizable().frame(width: 25, height: 25)
+                    }.padding()
+                }
+                
+                Text("# segments").fontDesign(.rounded)
+            }
+            
+            VStack(spacing: 0) {
+                HStack {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus.circle.fill").resizable().frame(width: 25, height: 25)
+                    }.padding()
+                    
+                    Text("\(lockForm.segmentLength)").font(.system(size: 84.0)).bold().fontDesign(.rounded)
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "minus.circle.fill").resizable().frame(width: 25, height: 25)
+                    }.padding()
+                }
+                
+                Text(lockForm.segmentLengthLabel).fontDesign(.rounded)
+            }
+        
+        }
+    }
+    
+//    var body: some View {
+//        NavigationStack {
+//            VStack {
+//                Form {
+//                    Section(header: Text("Lock Details")) {
+//                        
+//                        Picker("Type", selection: $selectedLockType) {
+//                            ForEach(lockTypes, id: \.self) { lockType in
+//                                    Text("\(lockType)")
+//                            }
+//                        }
+//                        .pickerStyle(.segmented)
+//                        .onChange(of: selectedLockType) { oldVal, newVal in
+//                            combination = ""
+//                            
+//                            switch selectedLockType {
+//                            case "Rotary":
+//                                numberOfSegments = 3
+//                                segmentLength = 2
+//                            case "Padlock":
+//                                numberOfSegments = 3
+//                                segmentLength = 1
+//                            case "Word":
+//                                numberOfSegments = 5
+//                                segmentLength = 1
+//                            case "Arrow":
+//                                segmentLength = 1
+//                                numberOfSegments = 15
+//                            default:
+//                                numberOfSegments = 3
+//                                segmentLength = 2
+//                            }
+//                        }
+//                        
+//                        if (selectedLockType != "Arrow") {
+//                            Stepper("\(numberOfSegments) segments", value: $numberOfSegments, in: 3...5)
+//                            Stepper(segmentLengthStepperLabel(), value: $segmentLength, in: 1...2)
+//                            
+//                        } else {
+//                            Grid() {
+//                                GridRow {
+//                                    Button {
+//                                        combination += "↑"
+//                                    } label: {
+//                                        Image(systemName: "arrow.up")
+//                                            .padding(5)
+//                                    }
+//                                    .font(.largeTitle)
+//                                    .buttonStyle(.bordered)
+//                                    .frame(maxWidth: .infinity, alignment: .center)
+//                                }
+//                                GridRow {
+//                                    HStack(spacing: 10.0) {
+//                                        Button {
+//                                            combination += "←"
+//                                        } label: {
+//                                            Image(systemName: "arrow.left")
+//                                                .padding(.vertical, 5)
+//                                        }
+//                                        .font(.largeTitle)
+//                                        .buttonStyle(.bordered)
+//                                        Button {
+//                                            if combination.count > 0 {
+//                                                combination.removeLast()
+//                                            }
+//                                        } label: {
+//                                            Image(systemName: "delete.backward")
+//                                                .padding(.vertical, 5)
+//                                        }
+//                                        .font(.largeTitle)
+//                                        .buttonStyle(.bordered)
+//                                        Button {
+//                                            combination += "→"
+//                                        } label: {
+//                                            Image(systemName: "arrow.right")
+//                                                .padding(.vertical, 5)
+//                                        }
+//                                        .font(.largeTitle)
+//                                        .buttonStyle(.bordered)
+//                                    }
+//                                    
+//                                }
+//                                GridRow {
+//                                    Button {
+//                                        combination += "↓"
+//                                    } label: {
+//                                        Image(systemName: "arrow.down")
+//                                            .padding(5)
+//                                    }
+//                                    .font(.largeTitle)
+//                                    .buttonStyle(.bordered)
+//                                }
+//                            }
+//                        }
+//                        
+//                        let textField = TextField("Combination", text: $combination)
+//                            .monospaced()
+//                            .onChange(of: combination) { oldValue, newValue in
+//                                formatCombination()
+//                            }
+//                            .onChange(of: segmentLength) {
+//                                formatCombination()
+//                            }
+//                            .onChange(of: numberOfSegments) {
+//                                formatCombination()
+//                            }
+//                            
+//                        if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
+//                            textField.keyboardType(.numberPad)
+//                        } else if selectedLockType == "Word" {
+//                            textField.textInputAutocapitalization(.never)
+//                        } else {
+//                            // We are in "Arrow" case with arrows
+//                            textField.disabled(true)
+//                        }
+//                    }
+//                    
+//                    Section(header: Text("Personalization - Optional")) {
+//                        LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
+//                    }
+//                }
+//            }
+//            .navigationTitle(lock == nil ? "New Lock" : "Edit Lock")
+//            .toolbarTitleDisplayMode(.inline)
+//            .toolbar {
+//                Button("Submit") {
+//                    if let _ = lock {
+//                        saveLockEdits()
+//                    } else {
+//                        createNewLock()
+//                    }
+//                }
+//            }
+//            .alert(alertMessage ?? "Error", isPresented: $showAlert) {
+//                Button("OK", role: .cancel) { }
+//            }
+//        }
+//        .preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
+//    }
     
     func formatCombination() {
         //First we dont format directional combinations
-        if selectedLockType == "Directional" {
+        if selectedLockType == "Arrow" {
             return
         }
         
@@ -213,21 +387,21 @@ struct LockFormView: View {
         combination = tempCombination
     }
     
-    func segmentLengthStepperLabel() -> String {
+    var segmentLengthLabel: String {
         switch selectedLockType {
         case "Padlock":
             fallthrough
         case "Rotary":
             if (segmentLength == 1) {
-                return "\(segmentLength) digit / segment"
+                return "digit / segment"
             } else {
-                return "\(segmentLength) digits / segment"
+                return "digits / segment"
             }
         case "Word":
             if (segmentLength == 1) {
-                return "\(segmentLength) letter / segment"
+                return "letter / segment"
             } else {
-                return "\(segmentLength) letters / segment"
+                return "letters / segment"
             }
         default:
             return ""
@@ -248,7 +422,7 @@ struct LockFormView: View {
             alertMessage = "Please enter a combination."
             showAlert = true
             return false
-        } else if selectedLockType != "Directional" && (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
+        } else if selectedLockType != "Arrow" && (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
             alertMessage = "Combination is too short!"
             showAlert = true
             return false
@@ -280,7 +454,7 @@ struct LockFormView: View {
                 alertMessage = "\(selectedLockType) combinations must only contain digits and letters!"
                 return false
             }
-        case "Directional":
+        case "Arrow":
             //TODO: Check if only arrow emojis are used
             return true
         default:

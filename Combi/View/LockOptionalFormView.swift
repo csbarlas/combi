@@ -28,10 +28,10 @@ struct LockOptionalFormView: View {
             }
             
             
-            TextField("Display Name", text: $displayName).multilineTextAlignment(.center).padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
+            TextField("Display Name", text: $displayName).padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
                 
             
-            TextField("Locker No.", text: $lockerNumber).monospaced().multilineTextAlignment(.center).padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
+            TextField("Optional: Locker No.", text: $lockerNumber).monospaced().padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
         }
     }
 }
