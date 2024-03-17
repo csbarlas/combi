@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4272B8BD9B7006DCAFE /* Emoji.swift */; };
 		D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */; };
-		D32BF42C2B8BE889006DCAFE /* LockOptionalFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF42B2B8BE889006DCAFE /* LockOptionalFormView.swift */; };
 		D34891912B9276710061698D /* CombiWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34891902B9276710061698D /* CombiWatchApp.swift */; };
 		D34891932B9276710061698D /* LockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34891922B9276710061698D /* LockListView.swift */; };
 		D34891952B9276730061698D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34891942B9276730061698D /* Assets.xcassets */; };
@@ -56,7 +55,6 @@
 /* Begin PBXFileReference section */
 		D32BF4272B8BD9B7006DCAFE /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
-		D32BF42B2B8BE889006DCAFE /* LockOptionalFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOptionalFormView.swift; sourceTree = "<group>"; };
 		D348918E2B9276710061698D /* CombiWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CombiWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34891902B9276710061698D /* CombiWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombiWatchApp.swift; sourceTree = "<group>"; };
 		D34891922B9276710061698D /* LockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListView.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				D382CD242B78274C00DCBA45 /* LockDetailView.swift */,
 				D382CD2B2B78329C00DCBA45 /* LockFormView.swift */,
 				D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */,
-				D32BF42B2B8BE889006DCAFE /* LockOptionalFormView.swift */,
 				D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */,
 			);
 			path = View;
@@ -305,7 +302,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */,
-				D32BF42C2B8BE889006DCAFE /* LockOptionalFormView.swift in Sources */,
 				D3E922562B8E446C00343012 /* ColorSchemeManager.swift in Sources */,
 				D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */,
 				D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */,

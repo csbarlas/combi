@@ -13,26 +13,11 @@ struct LockOptionalFormView: View {
     @Binding var lockerNumber: String
     @State private var isEmojiPopoverPresented = false
     
+    @FocusState private var lockNameFocused: Bool
+    @FocusState private var lockerNumberFocused: Bool
+    
     var body: some View {
-        VStack(spacing: 10) {
-            ZStack {
-                Circle().frame(width: 100).foregroundColor(.accentColor)
-                
-                Text(emojiSelection == nil ? "🔒" : emojiSelection!.emojiString).font(.system(size: 72)).onTapGesture(perform: {
-                    isEmojiPopoverPresented = true
-                }).popover(isPresented: $isEmojiPopoverPresented, content: {
-                    EmojiPickerView(selection: $emojiSelection)
-                        .frame(minWidth: 300, maxHeight: 200)
-                        .presentationCompactAdaptation(.popover)
-                })
-            }
-            
-            
-            TextField("Display Name", text: $displayName).padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
-                
-            
-            TextField("Optional: Locker No.", text: $lockerNumber).monospaced().padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0))
-        }
+        
     }
 }
 

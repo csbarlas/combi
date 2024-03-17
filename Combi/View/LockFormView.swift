@@ -33,13 +33,51 @@ struct LockFormView: View {
     @State private var isEmojiPopoverPresented = false
     @State private var emojiData: Emoji?
     
+    @FocusState private var lockNameFocused: Bool
+    @FocusState private var lockerNumberFocused: Bool
+    @FocusState private var combinationFocused: Bool
+    
     private var lock: Lock?
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
+                    VStack(spacing: 10) {
+                        ZStack {
+                            Circle().frame(width: 100).foregroundColor(.accentColor)
+                            
+                            Text(emojiData == nil ? "🔒" : emojiData!.emojiString).font(.system(size: 72)).onTapGesture(perform: {
+                                isEmojiPopoverPresented = true
+                            }).popover(isPresented: $isEmojiPopoverPresented, content: {
+                                EmojiPickerView(selection: $emojiData)
+                                    .frame(minWidth: 300, maxHeight: 200)
+                                    .presentationCompactAdaptation(.popover)
+                            })
+                        }
+                        
+                        TextField("Lock Name", text: $displayName)
+                            .padding()
+                            .fontWeight(.bold)
+                            .background(.background.quaternary)
+                            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                            .focused($lockNameFocused)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .keyboard) {
+                                    Spacer()
+                                    Button("Done") {
+                                        lockNameFocused = false
+                                        lockerNumberFocused = false
+                                        combinationFocused = false
+                                    }
+                                }
+                            }
+                            .autocorrectionDisabled(true)
+                            .keyboardType(.alphabet)
+                            
+                        
+                        TextField("Optional: Locker No.", text: $lockerNo).monospaced().padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0)).autocorrectionDisabled(true).keyboardType(.alphabet).focused($lockerNumberFocused)
+                    }
                     
                     Picker("Type", selection: $selectedLockType) {
                         ForEach(lockTypes, id: \.self) { lockType in
@@ -76,7 +114,32 @@ struct LockFormView: View {
                         arrowControlsView(combo: $combination)
                     }
                     
-                    TextField("Combination", text: $combination).monospaced().padding().fontWeight(.bold).background(.background.quaternary).clipShape(RoundedRectangle(cornerRadius: 10.0)).padding(.top)
+                    let comboTextField = TextField("Combination", text: $combination)
+                        .monospaced()
+                        .padding()
+                        .fontWeight(.bold)
+                        .background(.background.quaternary)
+                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                        .padding(.top)
+                        .focused($combinationFocused)
+                        .onChange(of: combination) {
+                            formatCombination()
+                        }
+                        .onChange(of: segmentLength) {
+                            formatCombination()
+                        }
+                        .onChange(of: numberOfSegments) {
+                            formatCombination()
+                        }
+                    
+                    if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
+                        comboTextField.keyboardType(.numberPad)
+                    } else if selectedLockType == "Word" {
+                        comboTextField.textInputAutocapitalization(.never)
+                    } else {
+                        // We are in "Arrow" case with arrows
+                        comboTextField.disabled(true)
+                    }
                     
                     Spacer()
                 }
@@ -208,146 +271,6 @@ struct LockFormView: View {
         }
     }
     
-//    var body: some View {
-//        NavigationStack {
-//            VStack {
-//                Form {
-//                    Section(header: Text("Lock Details")) {
-//                        
-//                        Picker("Type", selection: $selectedLockType) {
-//                            ForEach(lockTypes, id: \.self) { lockType in
-//                                    Text("\(lockType)")
-//                            }
-//                        }
-//                        .pickerStyle(.segmented)
-//                        .onChange(of: selectedLockType) { oldVal, newVal in
-//                            combination = ""
-//                            
-//                            switch selectedLockType {
-//                            case "Rotary":
-//                                numberOfSegments = 3
-//                                segmentLength = 2
-//                            case "Padlock":
-//                                numberOfSegments = 3
-//                                segmentLength = 1
-//                            case "Word":
-//                                numberOfSegments = 5
-//                                segmentLength = 1
-//                            case "Arrow":
-//                                segmentLength = 1
-//                                numberOfSegments = 15
-//                            default:
-//                                numberOfSegments = 3
-//                                segmentLength = 2
-//                            }
-//                        }
-//                        
-//                        if (selectedLockType != "Arrow") {
-//                            Stepper("\(numberOfSegments) segments", value: $numberOfSegments, in: 3...5)
-//                            Stepper(segmentLengthStepperLabel(), value: $segmentLength, in: 1...2)
-//                            
-//                        } else {
-//                            Grid() {
-//                                GridRow {
-//                                    Button {
-//                                        combination += "↑"
-//                                    } label: {
-//                                        Image(systemName: "arrow.up")
-//                                            .padding(5)
-//                                    }
-//                                    .font(.largeTitle)
-//                                    .buttonStyle(.bordered)
-//                                    .frame(maxWidth: .infinity, alignment: .center)
-//                                }
-//                                GridRow {
-//                                    HStack(spacing: 10.0) {
-//                                        Button {
-//                                            combination += "←"
-//                                        } label: {
-//                                            Image(systemName: "arrow.left")
-//                                                .padding(.vertical, 5)
-//                                        }
-//                                        .font(.largeTitle)
-//                                        .buttonStyle(.bordered)
-//                                        Button {
-//                                            if combination.count > 0 {
-//                                                combination.removeLast()
-//                                            }
-//                                        } label: {
-//                                            Image(systemName: "delete.backward")
-//                                                .padding(.vertical, 5)
-//                                        }
-//                                        .font(.largeTitle)
-//                                        .buttonStyle(.bordered)
-//                                        Button {
-//                                            combination += "→"
-//                                        } label: {
-//                                            Image(systemName: "arrow.right")
-//                                                .padding(.vertical, 5)
-//                                        }
-//                                        .font(.largeTitle)
-//                                        .buttonStyle(.bordered)
-//                                    }
-//                                    
-//                                }
-//                                GridRow {
-//                                    Button {
-//                                        combination += "↓"
-//                                    } label: {
-//                                        Image(systemName: "arrow.down")
-//                                            .padding(5)
-//                                    }
-//                                    .font(.largeTitle)
-//                                    .buttonStyle(.bordered)
-//                                }
-//                            }
-//                        }
-//                        
-//                        let textField = TextField("Combination", text: $combination)
-//                            .monospaced()
-//                            .onChange(of: combination) { oldValue, newValue in
-//                                formatCombination()
-//                            }
-//                            .onChange(of: segmentLength) {
-//                                formatCombination()
-//                            }
-//                            .onChange(of: numberOfSegments) {
-//                                formatCombination()
-//                            }
-//                            
-//                        if selectedLockType == "Rotary" || selectedLockType == "Padlock" {
-//                            textField.keyboardType(.numberPad)
-//                        } else if selectedLockType == "Word" {
-//                            textField.textInputAutocapitalization(.never)
-//                        } else {
-//                            // We are in "Arrow" case with arrows
-//                            textField.disabled(true)
-//                        }
-//                    }
-//                    
-//                    Section(header: Text("Personalization - Optional")) {
-//                        LockOptionalFormView(emojiSelection: $emojiData, displayName: $displayName, lockerNumber: $lockerNo)
-//                    }
-//                }
-//            }
-//            .navigationTitle(lock == nil ? "New Lock" : "Edit Lock")
-//            .toolbarTitleDisplayMode(.inline)
-//            .toolbar {
-//                Button("Submit") {
-//                    if let _ = lock {
-//                        saveLockEdits()
-//                    } else {
-//                        createNewLock()
-//                    }
-//                }
-//            }
-//            .alert(alertMessage ?? "Error", isPresented: $showAlert) {
-//                Button("OK", role: .cancel) { }
-//            }
-//        }
-//        .preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
-//    }
-    
     func formatCombination() {
         //First we dont format directional combinations
         if selectedLockType == "Arrow" {
@@ -422,7 +345,12 @@ struct LockFormView: View {
             alertMessage = "Please enter a combination."
             showAlert = true
             return false
-        } else if selectedLockType != "Arrow" && (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
+        } else if displayName.isEmpty {
+            alertMessage = "Please enter a lock name."
+            showAlert = true
+            return false
+        }
+        else if selectedLockType != "Arrow" && (combination.count - numberOfSpaces) < numberOfSegments * segmentLength {
             alertMessage = "Combination is too short!"
             showAlert = true
             return false
