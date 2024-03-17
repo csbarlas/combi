@@ -66,7 +66,7 @@ struct LockListCell: View {
     
     var body: some View {
         HStack {
-            Text(lock.emoji ?? "").font(.system(size: 45))
+            Text(lock.emoji.emojiString).font(.system(size: 45)).padding(.trailing, 5)
             
             VStack(alignment: .leading, spacing: 0) {
                 if let displayName = lock.displayName {

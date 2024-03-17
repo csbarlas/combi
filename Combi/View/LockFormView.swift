@@ -14,7 +14,6 @@ struct LockFormView: View {
     @StateObject private var colorSchemeManager = ColorSchemeManager.shared
     @Query private var locks: [Lock]
     
-    @State private var emoji: String
     @State private var displayName: String
     @State private var lockerNo: String
     @State private var combination: String
@@ -31,7 +30,7 @@ struct LockFormView: View {
     @State private var numberOfSpaces: Int
     
     @State private var isEmojiPopoverPresented = false
-    @State private var emojiData: Emoji?
+    @State private var emojiData: Emoji = Emoji.defaultEmoji
     
     @FocusState private var lockNameFocused: Bool
     @FocusState private var lockerNumberFocused: Bool
@@ -47,7 +46,7 @@ struct LockFormView: View {
                         ZStack {
                             Circle().frame(width: 100).foregroundColor(.accentColor)
                             
-                            Text(emojiData == nil ? "🔒" : emojiData!.emojiString).font(.system(size: 72)).onTapGesture(perform: {
+                            Text(emojiData.emojiString).font(.system(size: 72)).onTapGesture(perform: {
                                 isEmojiPopoverPresented = true
                             }).popover(isPresented: $isEmojiPopoverPresented, content: {
                                 EmojiPickerView(selection: $emojiData)
@@ -393,7 +392,7 @@ struct LockFormView: View {
     }
     
     func instanceAndStoreLock() {
-        let newLock = Lock(emoji: emoji.isEmpty ? "🔒" : emoji, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: numberOfSegments, segmentLength: segmentLength, acceptedValues: .numeric)
+        let newLock = Lock(emoji: emojiData, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: numberOfSegments, segmentLength: segmentLength, acceptedValues: .numeric)
         modelContext.insert(newLock)
     }
     
@@ -402,7 +401,8 @@ struct LockFormView: View {
         if !verified { return }
         else {
             guard let lock = lock else { return }
-            lock.emoji = self.emoji
+            // TODO: fix force unwrap later
+            lock.emoji = self.emojiData
             lock.combination = combination
             lock.numberOfSegments = numberOfSegments
             lock.segmentLength = segmentLength
@@ -417,7 +417,6 @@ struct LockFormView: View {
     // Initializer used when there is no lock to edit AKA create mode
     init() {
         self._combination = State(initialValue: "")
-        self._emoji = State(initialValue: "")
         self._displayName = State(initialValue: "")
         self._lockerNo = State(initialValue: "")
         self._showAlert = State(initialValue: false)
@@ -435,7 +434,7 @@ struct LockFormView: View {
      */
     init(lock: Lock) {
         self._combination = State(initialValue: lock.combination)
-        self._emoji = State(initialValue: lock.emoji ?? "")
+        self._emojiData = State(initialValue: lock.emoji)
         self._displayName = State(initialValue: lock.displayName ?? "")
         self._lockerNo = State(initialValue: lock.lockerNumber ?? "")
         self._showAlert = State(initialValue: false)

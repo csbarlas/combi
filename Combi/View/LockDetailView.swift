@@ -14,7 +14,7 @@ struct LockDetailView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(lock.emoji ?? "").font(.system(size: 72))
+            Text(lock.emoji.emojiString).font(.system(size: 72))
             
             if let displayName = lock.displayName {
                 Text(displayName).font(.largeTitle).bold()

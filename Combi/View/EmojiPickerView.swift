@@ -11,7 +11,7 @@ import SwiftUI
 struct EmojiPickerView: View {
     
     @Environment(\.dismiss) var dismiss
-    @Binding var selection: Emoji?
+    @Binding var selection: Emoji
     
     let cols = [GridItem(.adaptive(minimum: 44), spacing: 5)]
     let emojis = Emoji.library()
@@ -37,5 +37,5 @@ struct EmojiPickerView: View {
 }
 
 #Preview {
-    EmojiPickerView(selection: .constant(nil))
+    EmojiPickerView(selection: .constant(Emoji.defaultEmoji))
 }

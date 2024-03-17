@@ -17,7 +17,7 @@ enum LockCharacterType: Codable {
 @Model
 final class Lock: Identifiable {
     let id: UUID? = UUID()
-    var emoji: String? = ""
+    var emoji: Emoji = Emoji.defaultEmoji
     var numberOfSegments: Int? = 3
     var segmentLength: Int? = 2
     var acceptedValues: LockCharacterType? = LockCharacterType.numeric
@@ -26,7 +26,7 @@ final class Lock: Identifiable {
     var lockerNumber: String?
     var combination: String = ""
     
-    init(emoji: String = "🔒", displayName: String? = nil, lockerNumber: String? = nil, combination: String, numberOfSegments: Int, segmentLength: Int, acceptedValues: LockCharacterType) {
+    init(emoji: Emoji = Emoji.defaultEmoji, displayName: String? = nil, lockerNumber: String? = nil, combination: String, numberOfSegments: Int, segmentLength: Int, acceptedValues: LockCharacterType) {
         self.emoji = emoji
         self.displayName = displayName
         self.lockerNumber = lockerNumber

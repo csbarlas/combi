@@ -32,7 +32,7 @@ struct LockListCell: View {
     
     var body: some View {
         HStack {
-            Text(lock.emoji ?? "")
+            Text(lock.emoji.emojiString)
             Text(lock.displayName ?? "Lock")
         }
     }
