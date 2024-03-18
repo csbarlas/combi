@@ -65,6 +65,7 @@ struct LockListView: View {
 }
 
 struct LockListCell: View {
+    @AppStorage("redact") var redact: Bool = false
     var lock: Lock
     
     var body: some View {
@@ -73,16 +74,32 @@ struct LockListCell: View {
             
             VStack(alignment: .leading, spacing: 0) {
                 if let displayName = lock.displayName {
-                    Text(displayName).fontWeight(.bold)
+                    let displayName = Text(displayName).fontWeight(.bold)
+                    
+                    if redact {
+                        displayName.font(.title3)
+                    } else {
+                        displayName
+                    }
                 }
                 
                 if let lockerNumber = lock.lockerNumber {
-                    Text("No. " + lockerNumber).monospaced()
+                    let lockerNo = Text("No. " + lockerNumber).monospaced()
+                    
+                    if redact {
+                        lockerNo.font(.title3).bold(false)
+                    } else {
+                        lockerNo
+                    }
                 }
                 
-                Text(lock.combination).monospaced()
+                if (!redact) {
+                    Text(lock.combination).monospaced()
+                }
             }
         }
+        
+        
     }
 }
 
@@ -91,5 +108,8 @@ struct LockListCell: View {
     let container = try! ModelContainer(for: Lock.self, configurations: config)
     let lock = Lock.sampleLock()
     container.mainContext.insert(lock)
+    
+    let lockNoNumber = Lock(displayName: "School Locker", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric)
+    container.mainContext.insert(lockNoNumber)
     return LockListView().modelContainer(container)
 }
