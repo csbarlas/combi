@@ -449,5 +449,9 @@ struct LockFormView: View {
 
 
 #Preview {
-    LockFormView()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Lock.self, configurations: config)
+    let lock = Lock.sampleLock()
+    container.mainContext.insert(lock)
+    return LockFormView().modelContainer(container)
 }

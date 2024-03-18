@@ -13,20 +13,31 @@ struct LockListView: View {
     @StateObject private var colorSchemeManager = ColorSchemeManager.shared
     @Query private var locks: [Lock]
     @State private var showNewLock = false
+    @State private var showDeleteDialog = false
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(locks) { lock in
+                ForEach(Array(locks.enumerated()), id: \.offset) { index, lock in
                     NavigationLink {
                         LockDetailView(lock: lock)
                     } label: {
                         LockListCell(lock: lock)
                     }
+                    .swipeActions {
+                        Button("Delete") {
+                            showDeleteDialog = true
+                        }
+                        .tint(Color.red)
+                    }
+                    .confirmationDialog(Text("You cannot undo this action"), isPresented: $showDeleteDialog, titleVisibility: .visible, actions: {
+                        Button("Delete this lock?", role: .destructive) {
+                            withAnimation {
+                                modelContext.delete(locks[index])
+                            }
+                        }
+                    })
                 }
-                .onDelete(perform: { indexSet in
-                    deleteLocks(offsets: indexSet)
-                })
             }
             .navigationTitle("Your Locks")
             .toolbar {
@@ -50,14 +61,6 @@ struct LockListView: View {
                 }
             }
         }.preferredColorScheme(colorSchemeManager.getPreferredColorScheme())
-    }
-    
-    private func deleteLocks(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(locks[index])
-            }
-        }
     }
 }
 
@@ -84,5 +87,9 @@ struct LockListCell: View {
 }
 
 #Preview {
-    LockListView()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Lock.self, configurations: config)
+    let lock = Lock.sampleLock()
+    container.mainContext.insert(lock)
+    return LockListView().modelContainer(container)
 }
