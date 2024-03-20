@@ -15,6 +15,8 @@ struct LockListView: View {
     @State private var showNewLock = false
     @State private var showDeleteDialog = false
     
+    @StateObject var store: StoreManager = StoreManager()
+    
     var body: some View {
         NavigationStack {
             List {
@@ -43,7 +45,7 @@ struct LockListView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
-                        SettingsView()
+                        SettingsView().environmentObject(store)
                     } label: {
                         Image(systemName: "gear")
                     }

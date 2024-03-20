@@ -11,10 +11,24 @@ struct SettingsView: View {
     @State private var isToggle = false
     @StateObject private var colorSchemeManager = ColorSchemeManager.shared
     @AppStorage("redact") var redact: Bool = false
+    @EnvironmentObject var store: StoreManager
     
     var body: some View {
         Form {
             Section {
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.yellow)
+                        Image(systemName: "star.fill").foregroundStyle(.white)
+                    }
+                    
+                    NavigationLink {
+                        StoreView().environmentObject(store)
+                    } label: {
+                        Text("Combi Pro")
+                    }
+                }
+                
                 HStack {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.blue)
@@ -42,9 +56,11 @@ struct SettingsView: View {
                 HStack(alignment: .center) {
                     Spacer()
                     VStack {
+                        Text("Made With").fontDesign(.rounded).fontWeight(.bold).foregroundStyle(.tertiary).multilineTextAlignment(.center)
+                        
                         Image(systemName: "heart.fill").font(.system(size: 64.0)).foregroundStyle(.red)
                         
-                        Text("Made With Love\nBy Chris Barlas").fontDesign(.rounded).fontWeight(.bold).foregroundStyle(.tertiary).multilineTextAlignment(.center)
+                        Text("By Chris Barlas").fontDesign(.rounded).fontWeight(.bold).foregroundStyle(.tertiary).multilineTextAlignment(.center)
                     }
                     Spacer()
                 }.listRowBackground(Color.clear)

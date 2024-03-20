@@ -25,6 +25,10 @@
 		D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD272B7827BF00DCBA45 /* Lock.swift */; };
 		D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D382CD2B2B78329C00DCBA45 /* LockFormView.swift */; };
 		D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */; };
+		D3B9C3B32BAA5A9900356341 /* Products.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D3B9C3B22BAA5A9900356341 /* Products.storekit */; };
+		D3B9C3B52BAB5FF300356341 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9C3B42BAB5FF300356341 /* StoreView.swift */; };
+		D3B9C3B72BAB608F00356341 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9C3B62BAB608F00356341 /* StoreManager.swift */; };
+		D3B9C3B92BAB638700356341 /* Products.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3B9C3B82BAB638700356341 /* Products.plist */; };
 		D3E922562B8E446C00343012 /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E922552B8E446C00343012 /* ColorSchemeManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +78,10 @@
 		D382CD272B7827BF00DCBA45 /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D382CD2B2B78329C00DCBA45 /* LockFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockFormView.swift; sourceTree = "<group>"; };
 		D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D3B9C3B22BAA5A9900356341 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Products.storekit; path = Combi/Products.storekit; sourceTree = SOURCE_ROOT; };
+		D3B9C3B42BAB5FF300356341 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
+		D3B9C3B62BAB608F00356341 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		D3B9C3B82BAB638700356341 /* Products.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Products.plist; sourceTree = "<group>"; };
 		D3E922552B8E446C00343012 /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,8 +152,10 @@
 				D382CD262B7827AC00DCBA45 /* Model */,
 				D382CD232B78271E00DCBA45 /* View */,
 				D382CD152B78195900DCBA45 /* CombiApp.swift */,
+				D3B9C3B22BAA5A9900356341 /* Products.storekit */,
 				D382CD192B78195A00DCBA45 /* Assets.xcassets */,
 				D382CD1B2B78195A00DCBA45 /* Preview Content */,
+				D3B9C3B82BAB638700356341 /* Products.plist */,
 			);
 			path = Combi;
 			sourceTree = "<group>";
@@ -166,6 +176,7 @@
 				D382CD2B2B78329C00DCBA45 /* LockFormView.swift */,
 				D32BF4292B8BDD8C006DCAFE /* EmojiPickerView.swift */,
 				D3AD16FB2B8D32DB006D9B54 /* SettingsView.swift */,
+				D3B9C3B42BAB5FF300356341 /* StoreView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				D3E922552B8E446C00343012 /* ColorSchemeManager.swift */,
+				D3B9C3B62BAB608F00356341 /* StoreManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -277,7 +289,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B9C3B92BAB638700356341 /* Products.plist in Resources */,
 				D382CD1D2B78195A00DCBA45 /* Preview Assets.xcassets in Resources */,
+				D3B9C3B32BAA5A9900356341 /* Products.storekit in Resources */,
 				D382CD1A2B78195A00DCBA45 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,11 +318,13 @@
 				D32BF42A2B8BDD8C006DCAFE /* EmojiPickerView.swift in Sources */,
 				D3E922562B8E446C00343012 /* ColorSchemeManager.swift in Sources */,
 				D32BF4282B8BD9B7006DCAFE /* Emoji.swift in Sources */,
+				D3B9C3B72BAB608F00356341 /* StoreManager.swift in Sources */,
 				D3AD16FC2B8D32DB006D9B54 /* SettingsView.swift in Sources */,
 				D382CD2C2B78329C00DCBA45 /* LockFormView.swift in Sources */,
 				D382CD182B78195900DCBA45 /* LockListView.swift in Sources */,
 				D382CD162B78195900DCBA45 /* CombiApp.swift in Sources */,
 				D382CD282B7827BF00DCBA45 /* Lock.swift in Sources */,
+				D3B9C3B52BAB5FF300356341 /* StoreView.swift in Sources */,
 				D382CD252B78274C00DCBA45 /* LockDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,7 +353,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "CombiWatch-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = CombiWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = Combi;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.chrisbarlas.Combi;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -369,7 +385,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "CombiWatch-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = CombiWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = Combi;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.chrisbarlas.Combi;
 				LD_RUNPATH_SEARCH_PATHS = (
