@@ -223,50 +223,60 @@ struct LockFormView: View {
         }
     }
     
+    struct numberControlRow: View {
+        var data: Binding<Int>
+        //Inclusive
+        var from, to: Int
+        private var minusDisabled: Bool {
+            data.wrappedValue == from
+        }
+        
+        private var plusDisabled: Bool {
+            data.wrappedValue == to
+        }
+        
+        var body: some View {
+            HStack {
+                Button {
+                    if data.wrappedValue != from {
+                        data.wrappedValue -= 1
+                    }
+                } label: {
+                    Image(systemName: "minus.circle.fill")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .disabled(minusDisabled)
+                }.padding()
+                
+                Text("\(data.wrappedValue)").font(.system(size: 84.0)).bold().fontDesign(.rounded)
+                
+                Button {
+                    if data.wrappedValue != to {
+                        data.wrappedValue += 1
+                    }
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .disabled(plusDisabled)
+                }.padding()
+            }
+        }
+    }
+    
     struct numberControlsView: View {
         var lockForm: LockFormView
         
         var body: some View {
             VStack(spacing: 0) {
-                HStack {
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "plus.circle.fill").resizable().frame(width: 25, height: 25)
-                    }.padding()
-                    
-                    Text("\(lockForm.numberOfSegments)").font(.system(size: 84.0)).bold().fontDesign(.rounded)
-                    
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "minus.circle.fill").resizable().frame(width: 25, height: 25)
-                    }.padding()
-                }
-                
+                numberControlRow(data: lockForm.$numberOfSegments, from: 3, to: 5)
                 Text("# segments").fontDesign(.rounded)
             }
             
             VStack(spacing: 0) {
-                HStack {
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "plus.circle.fill").resizable().frame(width: 25, height: 25)
-                    }.padding()
-                    
-                    Text("\(lockForm.segmentLength)").font(.system(size: 84.0)).bold().fontDesign(.rounded)
-                    
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "minus.circle.fill").resizable().frame(width: 25, height: 25)
-                    }.padding()
-                }
-                
+                numberControlRow(data: lockForm.$segmentLength, from: 1, to: 2)
                 Text(lockForm.segmentLengthLabel).fontDesign(.rounded)
             }
-        
         }
     }
     
