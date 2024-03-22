@@ -14,6 +14,7 @@ struct LockListView: View {
     @Query private var locks: [Lock]
     @State private var showNewLock = false
     @State private var showDeleteDialog = false
+    @State private var showProStore = false
     
     @StateObject var store: StoreManager = StoreManager()
     
@@ -53,12 +54,19 @@ struct LockListView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showNewLock = true
+                        if !store.isProPurchased && locks.count >= 3 {
+                            showProStore = true
+                        } else {
+                            showNewLock = true
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }
                     .popover(isPresented: $showNewLock, content: {
                         LockFormView()
+                    })
+                    .popover(isPresented: $showProStore, content: {
+                        StoreView().environmentObject(store)
                     })
                 }
             }
@@ -113,5 +121,7 @@ struct LockListCell: View {
     
     let lockNoNumber = Lock(displayName: "School Locker", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric)
     container.mainContext.insert(lockNoNumber)
-    return LockListView().modelContainer(container)
+    let store = StoreManager()
+    
+    return LockListView().modelContainer(container).environmentObject(store)
 }

@@ -18,19 +18,6 @@ struct SettingsView: View {
             Section {
                 HStack {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.yellow)
-                        Image(systemName: "star.fill").foregroundStyle(.white)
-                    }
-                    
-                    NavigationLink {
-                        StoreView().environmentObject(store)
-                    } label: {
-                        Text("Combi Pro")
-                    }
-                }
-                
-                HStack {
-                    ZStack {
                         RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.blue)
                         Image(systemName: "circle.righthalf.filled").foregroundStyle(.white)
                     }
@@ -49,6 +36,40 @@ struct SettingsView: View {
                     }
                     
                     Toggle("Hide Combinations In List", isOn: $redact)
+                }
+                
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.green)
+                        Image(systemName: "info.circle.fill").foregroundStyle(.white)
+                    }
+                    
+                    Text("Tier")
+                    
+                    Spacer()
+                    
+                    if (store.isProPurchased) {
+                        Text("Pro").foregroundStyle(.secondary)
+                    } else {
+                        Text("Free").foregroundStyle(.secondary)
+                    }
+                }
+                
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 4.0).frame(width: 28, height: 28).foregroundStyle(.yellow)
+                        Image(systemName: "star.fill").foregroundStyle(.white)
+                    }
+                    
+                    NavigationLink {
+                        StoreView().environmentObject(store)
+                    } label: {
+                        if (store.isProPurchased) {
+                            Text("Combi Pro")
+                        } else {
+                            Text("Unlock Combi Pro")
+                        }
+                    }
                 }
             }
             
@@ -72,5 +93,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    let store = StoreManager()
+    return SettingsView().environmentObject(store)
 }

@@ -33,5 +33,6 @@ struct StoreView: View {
 }
 
 #Preview {
-    StoreView()
+    let store = StoreManager()
+    return StoreView().environmentObject(store)
 }
