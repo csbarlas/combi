@@ -15,13 +15,15 @@ struct LockListView: View {
     @State private var showNewLock = false
     @State private var showDeleteDialog = false
     @State private var showProStore = false
+    @State private var tappedLock: Lock?
     
     @StateObject var store: StoreManager = StoreManager()
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(Array(locks.enumerated()), id: \.offset) { index, lock in
+                ForEach(locks.indices, id: \.self) { index in
+                    let lock = locks[index]
                     NavigationLink {
                         LockDetailView(lock: lock)
                     } label: {
@@ -29,15 +31,14 @@ struct LockListView: View {
                     }
                     .swipeActions {
                         Button("Delete") {
+                            tappedLock = locks[index]
                             showDeleteDialog = true
                         }
                         .tint(Color.red)
                     }
-                    .confirmationDialog(Text("You cannot undo this action"), isPresented: $showDeleteDialog, titleVisibility: .visible, actions: {
+                    .confirmationDialog(Text("You cannot undo this action"), isPresented: $showDeleteDialog, titleVisibility: .visible, presenting: tappedLock, actions: { item in
                         Button("Delete this lock?", role: .destructive) {
-                            withAnimation {
-                                modelContext.delete(locks[index])
-                            }
+                            modelContext.delete(item)
                         }
                     })
                 }
