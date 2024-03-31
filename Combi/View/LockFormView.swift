@@ -225,7 +225,7 @@ struct LockFormView: View {
     
     struct numberControlRow: View {
         var data: Binding<Int>
-        //Inclusive
+        //Inclusive range
         var from, to: Int
         private var minusDisabled: Bool {
             data.wrappedValue == from
@@ -402,7 +402,7 @@ struct LockFormView: View {
     }
     
     func instanceAndStoreLock() {
-        let newLock = Lock(emoji: emojiData, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: numberOfSegments, segmentLength: segmentLength, acceptedValues: .numeric)
+        let newLock = Lock(emoji: emojiData, displayName: displayName.isEmpty ? nil : displayName, lockerNumber: lockerNo.isEmpty ? nil : lockerNo, combination: combination, numberOfSegments: numberOfSegments, segmentLength: segmentLength, lockType: LockFormView.pickerValueToLockType(pickerValue: selectedLockType))
         modelContext.insert(newLock)
     }
     
@@ -411,13 +411,11 @@ struct LockFormView: View {
         if !verified { return }
         else {
             guard let lock = lock else { return }
-            // TODO: fix force unwrap later
             lock.emoji = self.emojiData
             lock.combination = combination
             lock.numberOfSegments = numberOfSegments
             lock.segmentLength = segmentLength
-            //TODO: This will cause bugs, assuming lock type
-            lock.acceptedValues = .numeric
+            lock.lockType = LockFormView.pickerValueToLockType(pickerValue: selectedLockType)
             lock.displayName = displayName.isEmpty ? nil : displayName
             lock.lockerNumber = lockerNo.isEmpty ? nil : lockerNo
             dismiss()
@@ -449,19 +447,48 @@ struct LockFormView: View {
         self._lockerNo = State(initialValue: lock.lockerNumber ?? "")
         self._showAlert = State(initialValue: false)
         self._alertMessage = State(initialValue: nil)
-        self._selectedLockType = State(initialValue: "Rotary")
+        self._selectedLockType = State(initialValue: LockFormView.lockTypeToPickerValue(type: lock.lockType ?? .rotary))
         self._numberOfSegments = State(initialValue: lock.numberOfSegments ?? 3)
         self._segmentLength = State(initialValue: lock.segmentLength ?? 2)
         self._numberOfSpaces = State(initialValue: 0)
         self.lock = lock
     }
+    
+    static func pickerValueToLockType(pickerValue: String) -> LockType {
+        switch pickerValue {
+        case "Rotary":
+            return .rotary
+        case "Padlock":
+            return .padlock
+        case "Word":
+            return .word
+        case "Arrow":
+            return .arrow
+        default:
+            fatalError("Could not convert picker value to a LockType")
+        }
+    }
+    
+    static func lockTypeToPickerValue(type: LockType) -> String {
+        switch type {
+        case .rotary:
+            return "Rotary"
+        case .padlock:
+            return "Padlock"
+        case .word:
+            return "Word"
+        case .arrow:
+            return "Arrow"
+        }
+    }
 }
-
 
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Lock.self, configurations: config)
     let lock = Lock.sampleLock()
     container.mainContext.insert(lock)
-    return LockFormView().modelContainer(container)
+    
+    let store = StoreManager()
+    return LockFormView().modelContainer(container).environmentObject(store)
 }

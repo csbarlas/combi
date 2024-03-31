@@ -44,5 +44,5 @@ struct LockDetailView: View {
 }
 
 #Preview {
-    LockDetailView(lock: Lock(displayName: "LA Fitness Locker", lockerNumber: "1017", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric))
+    LockDetailView(lock: Lock(displayName: "LA Fitness Locker", lockerNumber: "1017", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, lockType: .rotary))
 }

@@ -20,6 +20,7 @@ struct LockListView: View {
     @StateObject var store: StoreManager = StoreManager()
     
     var body: some View {
+        let _ = print(modelContext.sqliteCommand)
         NavigationStack {
             List {
                 ForEach(locks.indices, id: \.self) { index in
@@ -120,7 +121,7 @@ struct LockListCell: View {
     let lock = Lock.sampleLock()
     container.mainContext.insert(lock)
     
-    let lockNoNumber = Lock(displayName: "School Locker", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, acceptedValues: .numeric)
+    let lockNoNumber = Lock(displayName: "School Locker", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, lockType: .rotary)
     container.mainContext.insert(lockNoNumber)
     let store = StoreManager()
     

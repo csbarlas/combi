@@ -10,10 +10,24 @@ import SwiftData
 
 @main
 struct CombiApp: App {
+    let container: ModelContainer
+    
+    init() {
+        do {
+            container = try ModelContainer(
+                for: Lock.self,
+                migrationPlan: LockMigrationPlan.self
+            )
+        }
+        catch {
+            fatalError("Failed to init model container.")
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
             LockListView()
         }
-        .modelContainer(for: Lock.self)
+        .modelContainer(container)
     }
 }
