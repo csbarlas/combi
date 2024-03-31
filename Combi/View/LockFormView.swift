@@ -386,7 +386,7 @@ struct LockFormView: View {
                 return false
             }
         case "Word":
-            let nonDigitLetterRegex = try! Regex("[^0-9A-Z]")
+            let nonDigitLetterRegex = try! Regex("[^0-9A-Z ]")
             if combination.contains(nonDigitLetterRegex) {
                 alertMessage = "\(selectedLockType) combinations must only contain digits and letters!"
                 return false
