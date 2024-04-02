@@ -4,4 +4,4 @@
 </p>
 
 ## What is Combi?
-Combi is an iOS and watchOS application that helps your manage your physical locks and their associated combinations. Add, edit, delete, and manage your locks on iOS. View them on the go with your Apple Watch!
+Combi is an iOS and watchOS application that helps manage your physical locks and their associated combinations. Add, edit, and delete your locks on iOS. View them on the go with your Apple Watch!
