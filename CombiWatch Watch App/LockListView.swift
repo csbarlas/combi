@@ -39,5 +39,12 @@ struct LockListCell: View {
 }
 
 #Preview {
-    LockListView()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Lock.self, configurations: config)
+    let lock = Lock.sampleLock()
+    container.mainContext.insert(lock)
+    
+    let lockNoNumber = Lock(displayName: "School Locker", combination: "12 34 56", numberOfSegments: 3, segmentLength: 2, lockType: .rotary)
+    container.mainContext.insert(lockNoNumber)
+    return LockListView().modelContainer(container)
 }
